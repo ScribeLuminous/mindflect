@@ -1,0 +1,195 @@
+/* =========================
+COLOR PALETTE
+========================= */
+:root {
+  --bg:        #f8f3f2;
+  --accent:    #e0fe9c;
+  --purple:    #523d72;
+  --blue:      #41b8d5;
+  --beige:     #efe9ce;
+  --grey:      #d9d9d9;
+  --black:     #000000;
+}
+
+/* =========================
+GLOBAL
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--bg);
+  color: var(--purple);
+  font-family: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+/* =========================
+TOP BAR
+========================= */
+.top-bar,
+.secondary-brand {
+  width: 100%;
+}
+
+.top-bar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.brand {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.top-link {
+  text-decoration: none;
+  color: var(--purple);
+  font-weight: 500;
+}
+
+/* =========================
+HERO
+========================= */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 72px 0 96px;
+}
+
+.hero-inner {
+  text-align: center;
+}
+
+.hero-title {
+  margin: 0 0 12px;
+  font-family: "The Youngest", "DM Sans", serif;
+  font-size: clamp(40px, 5vw, 64px);
+  line-height: 1.05;
+  font-weight: 400;
+}
+
+.hero-subtitle {
+  margin: 0 0 24px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* =========================
+BUTTONS
+========================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 28px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--purple);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.04);
+}
+
+.btn-primary:hover {
+  background-color: #d6fd83;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+CARDS SECTION
+========================= */
+.cards {
+  padding-top: 32px;
+}
+
+.cards-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 280px;
+  max-width: 420px;
+  background-color: white;
+  border-radius: 32px;
+  padding: 40px 40px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 230px;
+}
+
+/* specific card colors */
+.card-stress {
+  background-color: var(--beige);
+}
+
+.card-burnout {
+  background-color: var(--grey);
+}
+
+.card-title {
+  margin: 0 0 24px;
+  font-family: "The Youngest", "DM Sans", serif;
+  font-size: 32px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+/* center button in cards */
+.card .btn {
+  align-self: flex-start;
+}
+
+/* =========================
+RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  main {
+    padding-top: 16px;
+  }
+
+  .hero {
+    padding: 48px 0 64px;
+  }
+
+  .card {
+    padding: 32px 24px 28px;
+  }
+
+  .card-title {
+    font-size: 26px;
+  }
+
+  .top-bar-inner {
+    padding-inline: 16px;
+  }
+}

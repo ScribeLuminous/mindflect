@@ -1,6 +1,82 @@
-<div anvil-slot-repeat="default">
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mindflect – How are you today?</title>
 
-<center style="color:#888; margin: 50px;">
-  <i>This is a placeholder for your app's custom HTML. Edit it by changing the theme assets.</i>
-</center>
+    <!-- DM Sans from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- The Youngest (replace src with your actual font file if you have it) -->
+    <style>
+      @font-face {
+        font-family: "The Youngest";
+        src: local("The Youngest"); /* or url("the-youngest.woff2") format("woff2"); */
+        font-weight: normal;
+        font-style: normal;
+      }
+    </style>
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Top bar -->
+    <header class="top-bar">
+      <div class="top-bar-inner">
+        <div class="brand">+ Mindflect</div>
+        <a href="#" class="top-link">Login</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO SECTION -->
+      <section class="hero">
+        <div class="hero-inner">
+          <h1 class="hero-title">
+            how are you<br />today?
+          </h1>
+          <p class="hero-subtitle">
+            your easy companion to track your<br />
+            stress and burnout levels
+          </p>
+          <button class="btn btn-primary">REFLECT</button>
+        </div>
+      </section>
+
+      <!-- SECOND ROW BRAND (small repeat like your mockup) -->
+      <section class="secondary-brand">
+        <div class="top-bar-inner">
+          <div class="brand">+ Mindflect</div>
+          <a href="#" class="top-link">Login</a>
+        </div>
+      </section>
+
+      <!-- CARDS SECTION -->
+      <section class="cards">
+        <div class="cards-inner">
+
+          <!-- Stress Card -->
+          <article class="card card-stress">
+            <h2 class="card-title">
+              check your<br />
+              stress level
+            </h2>
+            <button class="btn btn-primary">CHECK STRESS</button>
+          </article>
+
+          <!-- Burnout Card -->
+          <article class="card card-burnout">
+            <h2 class="card-title">
+              check your<br />
+              burnout level
+            </h2>
+            <button class="btn btn-primary">CHECK BURNOUT</button>
+          </article>
+
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
