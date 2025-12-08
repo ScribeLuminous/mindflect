@@ -35,17 +35,17 @@ main {
 }
 
 /* =========================
-TOP BAR
+TOP BAR (HEADER)
 ========================= */
-.top-bar,
-.secondary-brand {
+.top-bar {
   width: 100%;
+  background-color: var(--blue);
 }
 
 .top-bar-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 16px 16px 0;
+  padding: 16px 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -54,12 +54,13 @@ TOP BAR
 
 .brand {
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  color: #f8f3f2;    /* off-white text on blue header */
 }
 
 .top-link {
   text-decoration: none;
-  color: var(--purple);
+  color: #f8f3f2;
   font-weight: 500;
 }
 
@@ -70,7 +71,7 @@ HERO
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 72px 0 96px;
+  padding: 72px 0 80px;   /* spacing below header */
 }
 
 .hero-inner {
@@ -83,12 +84,14 @@ HERO
   font-size: clamp(40px, 5vw, 64px);
   line-height: 1.05;
   font-weight: 400;
+  color: var(--purple);
 }
 
 .hero-subtitle {
   margin: 0 0 24px;
   font-size: 15px;
   line-height: 1.6;
+  color: var(--purple);
 }
 
 /* =========================
@@ -106,7 +109,10 @@ BUTTONS
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
 }
 
 .btn-primary {
@@ -125,7 +131,7 @@ BUTTONS
 CARDS SECTION
 ========================= */
 .cards {
-  padding-top: 32px;
+  padding-top: 16px;
 }
 
 .cards-inner {
@@ -138,22 +144,22 @@ CARDS SECTION
 .card {
   flex: 1 1 280px;
   max-width: 420px;
-  background-color: white;
   border-radius: 32px;
   padding: 40px 40px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   min-height: 230px;
+  color: var(--purple);
 }
 
-/* specific card colors */
+/* Specific card colors */
 .card-stress {
-  background-color: var(--beige);
+  background-color: var(--beige);   /* #efe9ce */
 }
 
 .card-burnout {
-  background-color: var(--grey);
+  background-color: var(--grey);    /* #d9d9d9 */
 }
 
 .card-title {
@@ -164,7 +170,7 @@ CARDS SECTION
   font-weight: 400;
 }
 
-/* center button in cards */
+/* Align button inside cards */
 .card .btn {
   align-self: flex-start;
 }
@@ -174,11 +180,11 @@ RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
   main {
-    padding-top: 16px;
+    padding-top: 24px;
   }
 
   .hero {
-    padding: 48px 0 64px;
+    padding: 56px 0 56px;
   }
 
   .card {
