@@ -1,0 +1,7 @@
+components:
+- layout_properties: {grid_position: 'LXFWDK,UUJOGD'}
+  name: button_1
+  properties: {text: button_1}
+  type: Button
+container: {type: ColumnPanel}
+is_package: true

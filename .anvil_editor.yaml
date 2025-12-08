@@ -1,8 +1,12 @@
 unique_ids:
   assets:
+    mindflect-removebg-preview.png: '1765173897810453527066934.00836'
+    mindflect.png: '1765173906044666462763675.6766'
     standard-page.html: NAUYJ4IABI6UTS5RZQ7KVBIOLCNJFDC3
     theme.css: DKB2ZOELWOANZMK6JEE45XNIUEXRYE6G
-  forms: {}
+  forms:
+    MainPage: '1765173861557755046263713.5967'
+    MainPage.stresslevel: '1765173872958852448550452.6648'
   modules: {}
   scripts: {}
   server_modules: {}
