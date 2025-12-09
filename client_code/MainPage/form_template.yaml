@@ -11,11 +11,24 @@ components:
   type: LinearPanel
 - layout_properties: {grid_position: 'AONXAG,OFAFJA'}
   name: main_lbl
-  properties: {align: center, bold: true, font: DM Sans, font_size: 60, text: 'how are you today?'}
+  properties:
+    align: center
+    bold: true
+    font: Young Serif
+    font_size: 50
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: small
+    spacing_below: none
+    text: "how are you \ntoday?"
   type: Label
 - layout_properties: {grid_position: 'SURQLO,QIPYYT'}
   name: sublabel
-  properties: {align: center, font: '', text: your easy companion to track your stress and burnout levels}
+  properties:
+    align: center
+    font: DM Sans
+    font_size: 13
+    text: "your easy companion to track your \nstress and burnout levels"
   type: Label
 - data_bindings: []
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
