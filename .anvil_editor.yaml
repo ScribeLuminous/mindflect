@@ -6,7 +6,7 @@ unique_ids:
     theme.css: DKB2ZOELWOANZMK6JEE45XNIUEXRYE6G
   forms:
     MainPage: '1765173861557755046263713.5967'
-    MainPage.stresslevel: '1765173872958852448550452.6648'
   modules: {}
   scripts: {}
-  server_modules: {}
+  server_modules:
+    MindflectServer: '1765344093249964994536007.8298'
