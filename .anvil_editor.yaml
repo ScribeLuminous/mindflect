@@ -6,6 +6,8 @@ unique_ids:
     theme.css: DKB2ZOELWOANZMK6JEE45XNIUEXRYE6G
   forms:
     MainPage: '1765173861557755046263713.5967'
+    MainPage.levelselection: '1765344513868461375001729.13446'
+    RowTemplate1: '1765344700131590760399524.6608'
   modules: {}
   scripts: {}
   server_modules:
