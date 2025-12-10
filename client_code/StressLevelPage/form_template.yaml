@@ -29,32 +29,23 @@ components:
   properties: {}
   type: LinearPanel
 - layout_properties: {grid_position: 'AONXAG,OFAFJA'}
-  name: main_lbl
+  name: stress_description
   properties:
-    align: center
+    align: left
     bold: true
-    font: PT Serif
-    font_size: 50
+    font: Young Serif
+    font_size: 30
     spacing:
       padding: [10, 0, 0, null]
     spacing_above: medium
     spacing_below: none
-    text: "how are you \ntoday?"
-  type: Label
-- layout_properties: {grid_position: 'SURQLO,QIPYYT'}
-  name: sublabel
-  properties:
-    align: center
-    font: DM Sans
-    font_size: 18
-    spacing_below: large
-    text: "your easy companion to track your \nstress and burnout levels"
+    text: The next slides will show you
   type: Label
 - data_bindings: []
-  event_bindings: {click: reflect_btn_click}
+  event_bindings: {click: stress_con_click}
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
-  name: reflect_btn
-  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect}
+  name: stress_con
+  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:chevron-right', text: continue}
   type: Button
 - layout_properties: {full_width_row: true, grid_position: 'JBSUDI,BJZYSR', row_background: ''}
   name: linear_panel_2

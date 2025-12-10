@@ -11,3 +11,7 @@ class levelselect(levelselectTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def stress_btn_click(self, **event_args):
+    open_form("StressLevelPage")
+    pass
