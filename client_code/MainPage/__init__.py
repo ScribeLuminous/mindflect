@@ -11,3 +11,7 @@ class MainPage(MainPageTemplate):
     self.init_components(**properties)
 
     # Any code you write here will run before the form opens.
+
+  def reflect_btn_click(self, **event_args):
+    
+    pass

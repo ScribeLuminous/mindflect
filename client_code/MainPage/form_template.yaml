@@ -51,9 +51,14 @@ components:
     text: "your easy companion to track your \nstress and burnout levels"
   type: Label
 - data_bindings: []
+  event_bindings: {click: reflect_btn_click}
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
   name: reflect_btn
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect}
   type: Button
+- layout_properties: {full_width_row: true, grid_position: 'JBSUDI,BJZYSR', row_background: ''}
+  name: linear_panel_2
+  properties: {background: '#0097b2', spacing_above: large, spacing_below: none}
+  type: LinearPanel
 container: {type: ColumnPanel}
 is_package: true

@@ -40,8 +40,8 @@ components:
       properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: check stress}
       type: Button
     layout_properties: {grid_position: 'YZRWRF,UZGCRR'}
-    name: grid_panel_2
-    properties: {}
+    name: stress_grid
+    properties: {background: '#efe9ce'}
     type: GridPanel
   - components:
     - layout_properties: {col_xs: 0, row: SRGLWX, width_xs: 12}
@@ -54,12 +54,16 @@ components:
       properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: check burnout}
       type: Button
     layout_properties: {grid_position: 'YZRWRF,GVFGVT'}
-    name: grid_panel_2_copy
-    properties: {}
+    name: burnout_grid
+    properties: {background: '#d9d9d9'}
     type: GridPanel
   layout_properties: {grid_position: 'CSTODL,UNSQYR'}
   name: column_panel_1
   properties: {spacing_above: large}
   type: ColumnPanel
+- layout_properties: {full_width_row: true, grid_position: 'FDSPJQ,PAEBSG'}
+  name: bottom_panel
+  properties: {background: '#0097b2', spacing_above: large}
+  type: LinearPanel
 container: {type: ColumnPanel}
 is_package: true
