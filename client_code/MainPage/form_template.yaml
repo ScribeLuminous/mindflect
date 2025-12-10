@@ -56,7 +56,34 @@ components:
   name: reflect_btn
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect}
   type: Button
-- layout_properties: {full_width_row: true, grid_position: 'JBSUDI,BJZYSR', row_background: ''}
+- components:
+  - layout_properties: {}
+    name: label_1
+    properties:
+      align: center
+      bold: true
+      foreground: '#d9d9d9'
+      spacing:
+        padding: [8, null, null, null]
+      spacing_above: small
+      spacing_below: none
+      text: |
+        ⚠️ IMPORTANT DISCLAIMER:
+    type: Label
+  - layout_properties: {}
+    name: disclaimer
+    properties:
+      align: center
+      bold: false
+      font: PT Serif
+      font_size: 11
+      foreground: '#d9d9d9'
+      italic: false
+      spacing_above: none
+      spacing_below: none
+      text: "This tool provides an estimate based on your self-reported answers and is for informational and awareness purposes only. This is not a medical diagnosis. \nStress and burnout can mimic other physical or mental health conditions. \nIf you are experiencing severe distress or if these results concern you, please consult a licensed mental health professional or a doctor."
+    type: Label
+  layout_properties: {full_width_row: true, grid_position: 'JBSUDI,BJZYSR', row_background: ''}
   name: linear_panel_2
   properties: {background: '#0097b2', spacing_above: large, spacing_below: none}
   type: LinearPanel

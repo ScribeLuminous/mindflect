@@ -9,6 +9,7 @@ unique_ids:
     MainPage.levelselect: '1765384887410964660274242.4087'
     StressLevelPage: '1765385765856507935051257.53033'
     StressLevelPage.stress_q1: '1765386133972304016269705.94574'
+    StressLevelPage.stress_q2: '1765389993691407288497676.68976'
   modules: {}
   scripts: {}
   server_modules:
