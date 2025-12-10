@@ -32,7 +32,7 @@ components:
   - components:
     - layout_properties: {col_xs: 0, row: SRGLWX, width_xs: 12}
       name: sublabel
-      properties: {align: center, font: DM Sans, font_size: 25, spacing_above: medium, spacing_below: large, text: monitor your stress levels}
+      properties: {align: center, font: DM Sans, font_size: 25, spacing_above: medium, spacing_below: large, text: 'Mind racing with worries?'}
       type: Label
     - data_bindings: []
       event_bindings: {click: stress_btn_click}
@@ -47,7 +47,7 @@ components:
   - components:
     - layout_properties: {col_xs: 0, row: SRGLWX, width_xs: 12}
       name: sublabel_copy
-      properties: {align: center, font: DM Sans, font_size: 25, spacing_above: medium, spacing_below: large, text: monitor your burnout levels}
+      properties: {align: center, font: DM Sans, font_size: 25, spacing_above: medium, spacing_below: large, text: 'Exhausted even after rest?'}
       type: Label
     - data_bindings: []
       layout_properties: {col_xs: 0, row: SRGLWX, width_xs: 12}
