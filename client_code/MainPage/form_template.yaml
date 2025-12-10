@@ -27,7 +27,7 @@ components:
   properties:
     align: center
     font: DM Sans
-    font_size: 13
+    font_size: 20
     text: "your easy companion to track your \nstress and burnout levels"
   type: Label
 - data_bindings: []
