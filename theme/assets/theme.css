@@ -127,6 +127,8 @@ BUTTONS
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
+
+
 /* =========================
 CARDS SECTION
 ========================= */
@@ -164,7 +166,7 @@ CARDS SECTION
 
 .card-title {
   margin: 0 0 24px;
-  font-family: "The Youngest", "DM Sans", serif;
+  font-family: "Young Serif", "DM Sans", serif;
   font-size: 32px;
   line-height: 1.15;
   font-weight: 400;
