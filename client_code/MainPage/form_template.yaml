@@ -56,6 +56,10 @@ components:
   name: reflect_btn
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect}
   type: Button
+- layout_properties: {grid_position: 'HZRVOO,HWVWEA'}
+  name: spacer_1
+  properties: {height: 32}
+  type: Spacer
 - components:
   - layout_properties: {}
     name: label_1
