@@ -24,7 +24,7 @@ unique_ids:
     StressLevelPage.stress_q5: '1765564129168930038252510.2217'
     StressLevelPage.stress_q6: '1765564164667549610139537.89606'
   modules:
-    slidermodule: '1765505559213308871754399.851'
+    StressLevelPage.slidermodule: '1765505559213308871754399.851'
   scripts: {}
   server_modules:
     ml_server: '1765344093249964994536007.8298'

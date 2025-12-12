@@ -5,14 +5,14 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+# --- IMPORT THE MODULE ---
+# Assuming your module is named 'slidermodule'
+from .. import slidermodule
 
 class stress_q1(stress_q1Template):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    # Any code you write here will run before the form opens.
-
   def q1_next_btn_click(self, **event_args):
-    open_form("StressLevelPage.stress_q2")
-    pass
+    open_form("StressLevelPage.stress_q1")
