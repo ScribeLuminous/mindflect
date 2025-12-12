@@ -10,7 +10,8 @@ unique_ids:
     StressLevelPage: '1765385765856507935051257.53033'
     StressLevelPage.stress_q1: '1765386133972304016269705.94574'
     StressLevelPage.stress_q2: '1765389993691407288497676.68976'
-  modules: {}
+  modules:
+    Module1: '1765505559213308871754399.851'
   scripts: {}
   server_modules:
     MindflectServer: '1765344093249964994536007.8298'
