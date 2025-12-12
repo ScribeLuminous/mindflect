@@ -1,7 +1,16 @@
 unique_ids:
   assets:
+    datasets/.gitkeep: '1765516644562693569555519.2306'
+    datasets/mental_productivity_dataset.csv: '1765516936714960411990588.2764'
+    datasets/student_habits_performance.csv: '1765516941149225865541260.39905'
+    datasets/wellbeing_and_lifestyle_data.csv: '1765517586970319561994387.9966'
     mindflect-removebg-preview.png: '1765173897810453527066934.00836'
     mindflect.png: '1765173906044666462763675.6766'
+    models/.gitkeep: '1765516653679302771776792.1132'
+    models/burnout_personal_model.pkl: '1765516914668348043782940.77655'
+    models/burnout_study_model.pkl: '1765516722016360864835468.21246'
+    models/burnout_work_model.pkl: '1765516919540492538198862.3641'
+    models/stress_level_classification_model.pkl: '1765516925765976815749094.5454'
     standard-page.html: NAUYJ4IABI6UTS5RZQ7KVBIOLCNJFDC3
     theme.css: DKB2ZOELWOANZMK6JEE45XNIUEXRYE6G
   forms:
