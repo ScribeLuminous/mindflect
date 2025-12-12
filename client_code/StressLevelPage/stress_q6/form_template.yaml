@@ -39,21 +39,21 @@ components:
       padding: [10, 0, 0, null]
     spacing_above: medium
     spacing_below: none
-    text: 🏃 2. Daily Exercise
+    text: 😊 6. Mood Level
   type: Label
 - layout_properties: {grid_position: 'SURQLO,QIPYYT'}
   name: sublabel
-  properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'About how many minutes of physical activity or exercise do you get per day?'}
+  properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'How would you describe your overall mood recently?'}
   type: Label
 - layout_properties: {grid_position: 'RLQKAJ,RGVMJS'}
   name: spacer_1_copy_2
   properties: {height: 32}
   type: Spacer
 - data_bindings: []
-  event_bindings: {click: q2_next_btn_click}
+  event_bindings: {click: q6_next_btn_click}
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
-  name: q2_next_btn
-  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:chevron-right', text: next}
+  name: q6_next_btn
+  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-square-o', text: submit}
   type: Button
 - layout_properties: {grid_position: 'LPZPCO,NSAYMW'}
   name: spacer_1
