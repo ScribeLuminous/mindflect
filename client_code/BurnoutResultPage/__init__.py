@@ -1,6 +1,6 @@
 # -- StressResultPage.py (FINAL, WORKING CODE) --
 
-from ._anvil_designer import StressResultPageTemplate
+from ._anvil_designer import BurnoutResultPageTemplate
 from anvil import *
 import plotly.graph_objects as go
 import anvil.server
@@ -9,46 +9,46 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import math
 
-class StressResultPage(StressResultPageTemplate):
+
+class BurnoutResultPage(BurnoutResultPageTemplate):
   def __init__(self, result, score, **properties):
     self.init_components(**properties)
 
     # Ensure score is an integer (1 to 100) for clean display
-    score_int = round(max(1, min(100, score))) 
+    score_int = round(max(1, min(100, score)))
 
     # Use 'score_int' for percent label
     self.percent_lbl.text = f"{score_int}%"
 
     # Use the level (e.g., "Low Stress") for the title
-    self.title_lbl.text = result['level']
+    self.title_lbl.text = result["level"]
 
     # Use the result's color for styling if you've set it up
     # NOTE: This line requires 'color' key in 'result' dict, if error occurs, comment it out.
-    # self.percent_lbl.foreground = result['color'] 
+    # self.percent_lbl.foreground = result['color']
 
     # Use score_int for the gauge
     self.draw_gauge(score_int)
 
     # Set the Explanation Label
-    self.explanation_lbl.text = self.get_explanation(result['level'])
+    self.explanation_lbl.text = self.get_explanation(result["level"])
 
     # Set the Recommendations Label
-    self.recs_lbl.text = self.get_recommendations(result['level'])
-
+    self.recs_lbl.text = self.get_recommendations(result["level"])
 
   def draw_gauge(self, percent):
     c = self.gauge_canvas
 
-    # NOTE: Clear is not a standard method, but we can reset the drawing context 
+    # NOTE: Clear is not a standard method, but we can reset the drawing context
     # for a clean start if needed, though for a simple static gauge, redrawing is enough.
-    # c.reset_context() 
+    # c.reset_context()
 
     # --- DRAW BACKGROUND ARC ---
     c.begin_path()
-    c.arc(150, 150, 120, 180 * math.pi / 180, 360 * math.pi / 180) # Angles in radians
-    c.line_width = 25 # Set line width for a thick arc
+    c.arc(150, 150, 120, 180 * math.pi / 180, 360 * math.pi / 180)  # Angles in radians
+    c.line_width = 25  # Set line width for a thick arc
     c.line_cap = "round"
-    c.stroke_style = "#e6e6e6" # Set the color
+    c.stroke_style = "#e6e6e6"  # Set the color
     c.stroke()
     c.close_path()
 
@@ -57,10 +57,10 @@ class StressResultPage(StressResultPageTemplate):
     angle_end_rad = (180 + (percent / 100) * 180) * math.pi / 180
 
     c.begin_path()
-    c.arc(150, 150, 120, angle_start_rad, angle_end_rad) # Angles in radians
+    c.arc(150, 150, 120, angle_start_rad, angle_end_rad)  # Angles in radians
     c.line_width = 25
     c.line_cap = "round"
-    c.stroke_style = "#41b8d5" # Set the color
+    c.stroke_style = "#41b8d5"  # Set the color
     c.stroke()
     c.close_path()
 
@@ -84,7 +84,7 @@ class StressResultPage(StressResultPageTemplate):
         "Your stress level is moderate. You are handling current demands well, "
         "but you are under pressure. Pay attention to early warning signs."
       )
-    else: # High Stress
+    else:  # High Stress
       return (
         "Your stress level is high today. This level can impact your health, "
         "mood, and performance. Immediate action is recommended to reduce pressure."
@@ -105,7 +105,7 @@ class StressResultPage(StressResultPageTemplate):
         "- **Mindfulness:** Dedicate 10 minutes daily to deep breathing or meditation.\n"
         "- **Screen Time:** Use screen-limiting apps after work hours to wind down."
       )
-    else: # High Stress
+    else:  # High Stress
       return (
         "**Urgent Action Plan:**\n"
         "- **Prioritize Rest:** Reduce non-essential tasks to free up mental energy.\n"
