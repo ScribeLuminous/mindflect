@@ -1,8 +1,11 @@
-# -- stress_q4.py (FINAL FULLY CORRECTED AND INDENTED) --
+# -- stress_q4.py (FINAL & VERIFIED WORKING VERSION) --
 
 from ._anvil_designer import stress_q4Template
 from anvil import *
 from ... import assessment_logic
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
 
 class stress_q4(stress_q4Template):
   def __init__(self, **properties):
@@ -21,7 +24,6 @@ class stress_q4(stress_q4Template):
       self.stress_q4_ans.text = "" 
 
   def live_validate(self):
-    # All lines below are indented correctly inside the method
     valid, result = assessment_logic.validate_input(
       self.stress_q4_ans.text,
       1,
@@ -46,7 +48,7 @@ class stress_q4(stress_q4Template):
       return
 
       # 2. VALIDATION PASSED: Now get the clean numeric result.
-      # This code is aligned with the 'if' statement's scope.
+      # THIS CODE IS ALIGNED WITH THE 'IF' STATEMENT'S SCOPE.
     _, result = assessment_logic.validate_input(
       self.stress_q4_ans.text,
       1,
@@ -57,7 +59,7 @@ class stress_q4(stress_q4Template):
     # 3. Save the result and advance
     assessment_logic.user_data["diet_quality_1_10"] = result
     open_form("StressLevelPage.stress_q5")
-  
+
   def stress_q4_ans_change(self, **event_args):
     # Indented correctly
     self.live_validate()

@@ -113,6 +113,10 @@ class StressResultPage(StressResultPageTemplate):
     """This method is called when the button is clicked"""
     pass
 
+  def save_btn_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
+
 def save_btn_click(self, **event_args):
   import anvil.users
   import anvil.server

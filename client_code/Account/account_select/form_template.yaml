@@ -1,0 +1,54 @@
+components:
+- layout_properties: {grid_position: 'KDYRBK,MANVIV'}
+  name: greet_lbl
+  properties:
+    align: center
+    bold: true
+    font: PT Serif
+    font_size: 30
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: medium
+    spacing_below: none
+    text: to save your results please
+    visible: true
+  type: Label
+- components:
+  - components:
+    - data_bindings: []
+      event_bindings: {click: signup_btn_click}
+      layout_properties: {col_xs: 3, row: XFDKAX, width_xs: 3}
+      name: signup_btn
+      properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:caret-up', text: signup}
+      type: Button
+    - data_bindings: []
+      event_bindings: {click: login_btn_click}
+      layout_properties: {col_xs: 6, row: XFDKAX, width_xs: 2}
+      name: login_btn
+      properties:
+        background: '#e0fe9c'
+        bold: true
+        font: DM Sans
+        font_size: 20
+        foreground: '#523d72'
+        icon: fa:sign-in
+        spacing:
+          padding: [null, 3, null, 8]
+        text: login
+      type: Button
+    name: grid_panel_1
+    properties: {}
+    type: GridPanel
+  - name: spacer_1
+    properties: {height: 32}
+    type: Spacer
+  - layout_properties: {}
+    name: spacer_1_copy
+    properties: {height: 5}
+    type: Spacer
+  layout_properties: {grid_position: 'NIFHHC,HTJMMJ'}
+  name: linear_panel_1
+  properties: {}
+  type: LinearPanel
+container: {type: ColumnPanel}
+is_package: true

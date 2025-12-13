@@ -16,7 +16,7 @@ components:
         border: '#41b8d5'
         font: DM Sans
         foreground: '#efe9ce'
-        icon: fa:chevron-right
+        icon: fa:sign-out
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
@@ -29,52 +29,59 @@ components:
   name: linear_panel_1
   properties: {}
   type: LinearPanel
+- layout_properties: {grid_position: 'WBMXNM,ZIVCGM'}
+  name: greet_lbl
+  properties:
+    align: center
+    bold: true
+    font: PT Serif
+    font_size: 50
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: medium
+    spacing_below: none
+    text: 'hello, '
+  type: Label
 - components:
-  - layout_properties: {col_xs: 0, row: ZBQBIW, width_xs: 12}
-    name: greet_lbl
-    properties:
-      align: center
-      bold: true
-      font: PT Serif
-      font_size: 50
-      spacing:
-        padding: [10, 0, 0, null]
-      spacing_above: medium
-      spacing_below: none
-      text: 'hello, '
-    type: Label
   - components:
-    - layout_properties: {grid_position: 'UQJJQI,KVUGDB'}
+    - layout_properties: {grid_position: 'WGSMNK,WBBUXG'}
       name: sublabel
       properties: {align: center, bold: true, font: DM Sans, font_size: 18, spacing_below: large, text: STRESS LEVELS}
       type: Label
-    layout_properties: {col_xs: 0, row: FBKVHW, width_xs: 6}
+    layout_properties: {col_xs: 3, row: EMUINT, width_xs: 6}
     name: column_panel_1
-    properties: {}
+    properties:
+      spacing:
+        margin: [null, null, 0, null]
+        padding: [null, null, 14, null]
     type: ColumnPanel
-  - components:
-    - layout_properties: {grid_position: 'ORLEJN,XKOMUK'}
-      name: sublabel_copy
-      properties: {align: center, bold: true, font: DM Sans, font_size: 18, spacing_below: large, text: BURNOUT LEVELS}
-      type: Label
-    layout_properties: {col_xs: 6, row: FBKVHW, width_xs: 6}
-    name: column_panel_1_copy
-    properties: {}
-    type: ColumnPanel
-  - layout_properties: {col_xs: 0, row: DGHXJF, width_xs: 6}
+  - layout_properties: {col_xs: 1, row: DGHXJF, width_xs: 10}
     name: stress_plot
-    properties: {}
-    type: Plot
-  - layout_properties: {col_xs: 6, row: DGHXJF, width_xs: 6}
-    name: burnout_plot
-    properties: {}
+    properties: {height: 292}
     type: Plot
   layout_properties: {grid_position: 'TJHQCS,VBLXTX'}
-  name: grid_panel_2
+  name: stress_grid_panel
   properties: {}
   type: GridPanel
 - layout_properties: {grid_position: 'FAXVTU,GLADAS'}
   name: spacer_1
+  properties: {height: 32}
+  type: Spacer
+- components:
+  - layout_properties: {col_xs: 3, row: SIHEWS, width_xs: 6}
+    name: sublabel_copy_2
+    properties: {align: center, bold: true, font: DM Sans, font_size: 18, spacing_below: large, text: BURNOUT LEVELS}
+    type: Label
+  - layout_properties: {col_xs: 1, row: DGHXJF, width_xs: 10}
+    name: stress_plot_copy
+    properties: {height: 292}
+    type: Plot
+  layout_properties: {grid_position: 'VJBFLE,HCZVMJ'}
+  name: burnout_grid_panel
+  properties: {}
+  type: GridPanel
+- layout_properties: {grid_position: 'EDRZNS,BIMEUN'}
+  name: spacer_1_copy
   properties: {height: 32}
   type: Spacer
 - data_bindings: []
@@ -83,10 +90,6 @@ components:
   name: reflect_btn
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect today}
   type: Button
-- layout_properties: {grid_position: 'MFUOAR,UEYKOZ'}
-  name: spacer_1_copy
-  properties: {height: 32}
-  type: Spacer
 - components:
   - layout_properties: {}
     name: label_1
