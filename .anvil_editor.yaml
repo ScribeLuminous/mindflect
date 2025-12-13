@@ -25,7 +25,8 @@ unique_ids:
     StressLevelPage.stress_q5: '1765564129168930038252510.2217'
     StressLevelPage.stress_q6: '1765564164667549610139537.89606'
     StressResultPage: '1765604709326753245040372.3923'
-  modules: {}
+  modules:
+    assessment_logic: '1765609123887336431712215.72986'
   scripts: {}
   server_modules:
     server_code: '1765344093249964994536007.8298'
