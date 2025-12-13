@@ -16,9 +16,13 @@ class Login(LoginTemplate):
 
     # Any code you write here will run before the form opens.
 
-  def login_btn_click(self, **event_args):
+def login_btn_click(self, **event_args):
+  try:
+    anvil.users.login_with_form()
     open_form("MainPage.levelselect")
-    pass
+  except:
+    Notification("Login failed").show()
+
 
   def account_btn_click(self, **event_args):
     open_form("Account")

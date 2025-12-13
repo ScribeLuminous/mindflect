@@ -77,9 +77,9 @@ components:
   properties: {}
   type: GridPanel
 - data_bindings: []
-  event_bindings: {click: save_btn_click_click}
+  event_bindings: {click: save_btn_click}
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
-  name: save_btn_click
+  name: save_btn
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: save results}
   type: Button
 - layout_properties: {grid_position: 'HZRVOO,HWVWEA'}

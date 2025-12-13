@@ -3,22 +3,25 @@ db_schema:
   files:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: path
       type: string
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: file
       type: media
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: file_version
       type: string
     server: full
     title: Files
   stress_logs:
     client: none
-    columns: []
+    columns:
+    - admin_ui: {width: 200}
+      name: user
+      type: string
     server: full
-    title: Stress_Logs
+    title: stress_logs
   users:
     client: none
     columns: []
