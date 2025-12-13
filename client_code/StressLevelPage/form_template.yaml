@@ -39,7 +39,7 @@ components:
       padding: [10, 0, 0, null]
     spacing_above: medium
     spacing_below: none
-    text: 'The following questions will help us determine your stress levels. '
+    text: The following questions will help us determine your stress level of the day.
   type: Label
 - layout_properties: {grid_position: 'LHVGWP,HIWSQK'}
   name: stress_description_copy

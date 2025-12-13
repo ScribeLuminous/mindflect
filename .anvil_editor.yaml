@@ -14,6 +14,7 @@ unique_ids:
     standard-page.html: NAUYJ4IABI6UTS5RZQ7KVBIOLCNJFDC3
     theme.css: DKB2ZOELWOANZMK6JEE45XNIUEXRYE6G
   forms:
+    BurnoutLevelPage: '1765599435784127439255632.66356'
     MainPage: '1765173861557755046263713.5967'
     MainPage.levelselect: '1765384887410964660274242.4087'
     StressLevelPage: '1765385765856507935051257.53033'
@@ -23,8 +24,7 @@ unique_ids:
     StressLevelPage.stress_q4: '1765563922251108324729643.32463'
     StressLevelPage.stress_q5: '1765564129168930038252510.2217'
     StressLevelPage.stress_q6: '1765564164667549610139537.89606'
-  modules:
-    StressLevelPage.slidermodule: '1765505559213308871754399.851'
+  modules: {}
   scripts: {}
   server_modules:
     ml_server: '1765344093249964994536007.8298'

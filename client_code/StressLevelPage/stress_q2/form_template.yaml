@@ -28,23 +28,32 @@ components:
   name: linear_panel_1
   properties: {}
   type: LinearPanel
-- layout_properties: {grid_position: 'AONXAG,OFAFJA'}
-  name: stress_q1
-  properties:
-    align: left
-    bold: true
-    font: Young Serif
-    font_size: 30
-    spacing:
-      padding: [10, 0, 0, null]
-    spacing_above: medium
-    spacing_below: none
-    text: 🏃 2. Daily Exercise
-  type: Label
-- layout_properties: {grid_position: 'SURQLO,QIPYYT'}
-  name: sublabel
-  properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'About how many minutes of physical activity or exercise do you get per day?'}
-  type: Label
+- components:
+  - layout_properties: {col_xs: 0, row: IRKGML, width_xs: 12}
+    name: stress_q1
+    properties:
+      align: left
+      bold: true
+      font: Young Serif
+      font_size: 30
+      spacing:
+        padding: [10, 0, 0, null]
+      spacing_above: medium
+      spacing_below: none
+      text: 🏃 2. Daily Exercise
+    type: Label
+  - layout_properties: {col_xs: 0, row: YGWUEV, width_xs: 12}
+    name: sublabel
+    properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'About how many minutes of physical activity or exercise do you get per day?'}
+    type: Label
+  - layout_properties: {col_xs: 4, row: VIHVTG, width_xs: 3}
+    name: stress_q2_ans
+    properties: {placeholder: 0 - 60}
+    type: TextBox
+  layout_properties: {grid_position: 'QOJMVG,CAYWKI'}
+  name: grid_panel_2
+  properties: {}
+  type: GridPanel
 - layout_properties: {grid_position: 'RLQKAJ,RGVMJS'}
   name: spacer_1_copy_2
   properties: {height: 32}
