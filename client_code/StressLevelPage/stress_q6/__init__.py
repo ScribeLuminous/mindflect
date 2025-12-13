@@ -5,28 +5,40 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
+from ... import assessment_logic
 
 class stress_q6(stress_q6Template):
   def __init__(self, **properties):
-    # Set Form properties and Data Bindings.
     self.init_components(**properties)
+    self.label_error.visible = False
+    self.stress_q6_ans.text = str(assessment_logic.user_data['mood_level_1_10'])
 
-    # Any code you write here will run before the form opens.
+  def handle_input_and_submit(self):
+    input_str = self.stress_q6_ans.text
+
+    # Validation: MIN 1, MAX 10. Check if input is a whole number (int).
+    valid, result = assessment_logic.validate_input(input_str, 1, 10)
+
+    if valid and result != int(result):
+      valid = False
+      result = "Please enter a whole number (1 to 10)."
+
+    if valid:
+      # 1. SAVE FINAL DATA POINT
+      assessment_logic.user_data['mood_level_1_10'] = int(result)
+
+      # 2. PERFORM FINAL CALCULATION
+      final_score = assessment_logic.calculate_total_stress()
+      final_result = assessment_logic.get_result_feedback(final_score)
+
+      # 3. OPEN RESULTS PAGE and pass the data
+      open_form("StressResultPage", result=final_result, score=final_score)
+    else:
+      self.label_error.text = result
+      self.label_error.visible = True
 
   def q6_submit_btn_click(self, **event_args):
-    try:
-      features = {
-        "sleep_hours": float(self.stress_q1Template.text),
-        "daily_exercise_mins": float(self.stress_q2Template.text),
-        "screen_time_hours": float(self.stress_q3Template.text),
-        "diet_quality_1_10": int(self.stress_q4Template.text),
-        "productivity_score_1_10": int(self.stress_q5Template.text),
-        "mood_level_1_10": int(self.stress_q6Template.text),
-      }
-    except:
-      alert("Please enter valid numbers for all questions.")
-      open_form("StressLevelPage.stress_q1")
-      return
+    self.handle_input_and_submit()
 
-    result = anvil.server.call("predict_stress", features)
-    open_form("StressResultPage", result=result)
+  def stress_q6_ans_pressed_enter(self, **event_args):
+    self.handle_input_and_submit()

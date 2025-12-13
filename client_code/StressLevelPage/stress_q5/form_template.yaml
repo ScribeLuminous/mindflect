@@ -44,9 +44,17 @@ components:
     type: Label
   - layout_properties: {col_xs: 0, row: XNZTOY, width_xs: 12}
     name: sublabel
-    properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'How productive have you felt in your daily tasks over the past few days?'}
+    properties:
+      align: center
+      font: PT Serif
+      font_size: 18
+      spacing_below: large
+      text: |
+        How productive have you felt in your daily tasks over the past few days?
+        (0 - lowest  |  10 - highest)
     type: Label
-  - layout_properties: {col_xs: 4, row: YJUOKI, width_xs: 3}
+  - event_bindings: {pressed_enter: stress_q5_ans_pressed_enter}
+    layout_properties: {col_xs: 4, row: YJUOKI, width_xs: 3}
     name: stress_q5_ans
     properties: {placeholder: 0 - 10}
     type: TextBox
@@ -54,6 +62,10 @@ components:
   name: grid_panel_2
   properties: {}
   type: GridPanel
+- layout_properties: {grid_position: 'NAKGLD,JUAKTG'}
+  name: label_error
+  properties: {font: DM Sans, font_size: 10, italic: true}
+  type: Label
 - layout_properties: {grid_position: 'RLQKAJ,RGVMJS'}
   name: spacer_1_copy_2
   properties: {height: 32}
