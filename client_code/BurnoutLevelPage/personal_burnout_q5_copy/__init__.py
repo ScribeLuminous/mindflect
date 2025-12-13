@@ -1,6 +1,6 @@
 # --- stress_q1 ---
 
-from ._anvil_designer import personal_burnout_q2_copyTemplate
+from ._anvil_designer import personal_burnout_q5_copyTemplate
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 from ... import assessment_logic
 
 
-class personal_burnout_q2_copy(personal_burnout_q2_copyTemplate):
+class personal_burnout_q5_copy(personal_burnout_q5_copyTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False
@@ -53,12 +53,12 @@ class personal_burnout_q2_copy(personal_burnout_q2_copyTemplate):
   def q1_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_personal_q3_ans_pressed_enter(self, **event_args):
+  def burnout_personal_q5_ans_pressed_enter(self, **event_args):
     self.handle_input_and_advance()
 
     # --- THIS IS THE FUNCTION YOU ASKED FOR ---
 
-  def burnout_personal_q3_ans_change(self, **event_args):
+  def burnout_personal_q5_ans_change(self, **event_args):
     """This method is called when the text in this text box is edited"""
     self.live_validate()
 
