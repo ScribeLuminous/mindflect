@@ -30,7 +30,7 @@ components:
   type: LinearPanel
 - components:
   - layout_properties: {col_xs: 0, row: LPKCNU, width_xs: 12}
-    name: stress_q1
+    name: stress_q4
     properties:
       align: left
       bold: true
@@ -64,7 +64,7 @@ components:
       text: "1 - very poor (ultra-processed foods, fast food, and sugary drinks) \n5 - average/moderate (mixed diet, some fruits/veggies, snacks, desserts, or convenience meals daily)\n10 - excellent (whole, unprocessed foods, minimal sugar or saturated fat)\n"
     type: Label
   - event_bindings: {pressed_enter: stress_q4_ans_pressed_enter}
-    layout_properties: {col_xs: 4, row: PRUCKR, width_xs: 3}
+    layout_properties: {col_xs: 4, row: VNUFLQ, width_xs: 3}
     name: stress_q4_ans
     properties: {placeholder: 1 - 10}
     type: TextBox
