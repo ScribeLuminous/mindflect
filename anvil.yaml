@@ -3,14 +3,14 @@ db_schema:
   burnout_logs:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
-      name: user
+    - admin_ui: {width: 200}
+      name: users
       target: users
-      type: link_single
-    - admin_ui: {order: 1, width: 200}
+      type: link_multiple
+    - admin_ui: {width: 200}
       name: date
       type: datetime
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: total_score
       type: number
     server: full
@@ -37,19 +37,19 @@ db_schema:
   users:
     client: full
     columns:
-    - admin_ui: {order: 1, width: 200}
-      name: username
-      type: string
-    - admin_ui: {order: 2, width: 200}
-      name: password
-      type: string
-    - admin_ui: {order: -3, width: 200}
+    - admin_ui: {width: 200}
       name: id
       type: number
-    - admin_ui: {order: -2, width: 200}
+    - admin_ui: {width: 200}
       name: email
       type: string
-    - admin_ui: {order: 3, width: 200}
+    - admin_ui: {width: 200}
+      name: username
+      type: string
+    - admin_ui: {width: 200}
+      name: password
+      type: string
+    - admin_ui: {width: 200}
       name: date_joined
       type: datetime
     server: full
