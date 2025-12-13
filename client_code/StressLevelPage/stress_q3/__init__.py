@@ -14,5 +14,5 @@ class stress_q3(stress_q3Template):
     # Any code you write here will run before the form opens.
 
   def q3_next_btn_click(self, **event_args):
-    open_form("StressLevelPage.stress_q2")
+    open_form("StressLevelPage.stress_q4")
     pass
