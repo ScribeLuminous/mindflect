@@ -21,5 +21,5 @@ class Login(LoginTemplate):
     pass
 
   def account_btn_click(self, **event_args):
-    
+    open_form("Account")
     pass

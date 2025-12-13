@@ -1,6 +1,6 @@
 # --- stress_q1 ---
 
-from ._anvil_designer import student_burnout_q1Template
+from ._anvil_designer import student_burnout_q2Template
 from anvil import *
 import anvil.server
 import anvil.tables as tables
@@ -10,7 +10,7 @@ from anvil.tables import app_tables
 from ... import assessment_logic
 
 
-class student_burnout_q1(student_burnout_q1Template):
+class student_burnout_q2(student_burnout_q2Template):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False

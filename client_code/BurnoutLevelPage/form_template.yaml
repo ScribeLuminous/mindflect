@@ -6,8 +6,9 @@ components:
       properties: {height: 55.87109375, source: _/theme/mindflect-removebg-preview.png}
       type: Image
     - data_bindings: []
+      event_bindings: {click: home_btn_click}
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: login_btn
+      name: home_btn
       properties:
         align: right
         background: '#0097b2'
@@ -15,11 +16,11 @@ components:
         border: '#41b8d5'
         font: DM Sans
         foreground: '#efe9ce'
-        icon: fa:chevron-right
+        icon: fa:home
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: login
+        text: main page
       type: Button
     name: grid_panel_1
     properties: {}
@@ -46,19 +47,42 @@ components:
   properties: {height: 32}
   type: Spacer
 - components:
-  - layout_properties: {col_xs: 3, row: ECGIHH, width_xs: 6}
+  - layout_properties: {col_xs: 2, row: ECGIHH, width_xs: 7}
     name: label_1
-    properties: {bold: true, font: Young Serif, font_size: 20, text: 'What best describes your current situation?'}
+    properties: {bold: true, font: Young Serif, font_size: 25, text: 'What best describes your current situation?'}
     type: Label
   - data_bindings: []
-    layout_properties: {col_xs: 3, row: UNBIQH, width_xs: 6}
-    name: radio_btn
-    properties: {text: ''}
+    event_bindings: {clicked: radio_btn_clicked}
+    layout_properties: {col_xs: 3, row: WWFJWV, width_xs: 5}
+    name: radio_student
+    properties: {font: DM Sans, font_size: 18, text: I'm a student}
+    type: RadioButton
+  - data_bindings: []
+    event_bindings: {clicked: radio_working_clicked}
+    layout_properties: {col_xs: 3, row: NSJNEB, width_xs: 6}
+    name: radio_working
+    properties: {font: DM Sans, font_size: 18, text: I’m working (employed / freelancer / business)}
+    type: RadioButton
+  - data_bindings: []
+    event_bindings: {clicked: radio_working_clicked}
+    layout_properties: {col_xs: 3, row: TFTLSN, width_xs: 6}
+    name: radio_both
+    properties: {font: DM Sans, font_size: 18, text: I am both}
+    type: RadioButton
+  - data_bindings: []
+    event_bindings: {clicked: radio_working_clicked}
+    layout_properties: {col_xs: 3, row: SSWYPV, width_xs: 4}
+    name: radio_none
+    properties: {font: DM Sans, font_size: 18, text: 'Not working, not student'}
     type: RadioButton
   layout_properties: {grid_position: 'AQUSLU,LZXAUQ'}
   name: grid_panel_2
-  properties: {}
+  properties: {background: '#d9e7ec'}
   type: GridPanel
+- layout_properties: {grid_position: 'CDCJMR,PYGFSH'}
+  name: label_error
+  properties: {font: DM Sans, font_size: 12, italic: true}
+  type: Label
 - layout_properties: {grid_position: 'QXRBCQ,OEHKIP'}
   name: spacer_1
   properties: {height: 32}

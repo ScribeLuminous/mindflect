@@ -7,7 +7,7 @@ components:
       type: Image
     - data_bindings: []
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: account_btn
+      name: home_btn
       properties:
         align: right
         background: '#0097b2'
@@ -15,11 +15,11 @@ components:
         border: '#41b8d5'
         font: DM Sans
         foreground: '#efe9ce'
-        icon: fa:user-circle
+        icon: fa:home
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: account
+        text: main page
       type: Button
     name: grid_panel_1
     properties: {}
