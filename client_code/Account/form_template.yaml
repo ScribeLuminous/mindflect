@@ -7,7 +7,7 @@ components:
       type: Image
     - data_bindings: []
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: login_btn
+      name: logout_btn
       properties:
         align: right
         background: '#0097b2'
@@ -19,7 +19,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: login
+        text: log out
       type: Button
     name: grid_panel_1
     properties: {}
@@ -28,67 +28,38 @@ components:
   name: linear_panel_1
   properties: {}
   type: LinearPanel
-- components:
-  - layout_properties: {col_xs: 2, row: XTAUCJ, width_xs: 8}
-    name: gauge_canvas
-    properties: {height: 69}
-    type: Canvas
-  - layout_properties: {col_xs: 3, row: OSJLVJ, width_xs: 3}
-    name: title_lbl_copy
-    properties:
-      align: center
-      bold: false
-      font: PT Serif
-      font_size: 40
-      spacing:
-        padding: [10, 0, 0, null]
-      spacing_above: medium
-      spacing_below: none
-      text: ''
-    type: Label
-  - layout_properties: {col_xs: 6, row: OSJLVJ, width_xs: 2}
-    name: title_lbl
-    properties:
-      align: center
-      bold: false
-      font: PT Serif
-      font_size: 40
-      spacing:
-        padding: [10, 0, 0, null]
-      spacing_above: medium
-      spacing_below: none
-      text: ''
-    type: Label
-  - layout_properties: {col_xs: 4, row: YXVBLD, width_xs: 3}
-    name: percent_lbl
-    properties: {align: center, bold: true, font: PT Serif, font_size: 50}
-    type: Label
-  - layout_properties: {col_xs: 0, row: DAWRQV, width_xs: 12}
-    name: recs_lbl
-    properties: {align: center, font: DM Sans, font_size: 18, spacing_below: large, text: ''}
-    type: Label
-  - layout_properties: {col_xs: 0, row: UTXTEN, width_xs: 12}
-    name: explanation_lbl
-    properties: {align: center, font: DM Sans, font_size: 18, spacing_below: large, text: ''}
-    type: Label
-  layout_properties: {grid_position: 'SPXOXR,LFHVDF'}
-  name: grid_panel_2
-  properties: {}
-  type: GridPanel
+- layout_properties: {grid_position: 'AONXAG,OFAFJA'}
+  name: main_lbl
+  properties:
+    align: center
+    bold: true
+    font: PT Serif
+    font_size: 50
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: medium
+    spacing_below: none
+    text: "how are you \ntoday?"
+  type: Label
+- layout_properties: {grid_position: 'SURQLO,QIPYYT'}
+  name: sublabel
+  properties:
+    align: center
+    font: DM Sans
+    font_size: 18
+    spacing_below: large
+    text: "your easy companion to track your \nstress and burnout levels"
+  type: Label
 - data_bindings: []
-  event_bindings: {click: save_btn_click_click}
+  event_bindings: {click: reflect_btn_click}
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
-  name: save_btn_click
-  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: save results}
+  name: reflect_btn
+  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect}
   type: Button
 - layout_properties: {grid_position: 'HZRVOO,HWVWEA'}
   name: spacer_1
   properties: {height: 32}
   type: Spacer
-- layout_properties: {grid_position: 'VLYXEQ,KIWHWX'}
-  name: label_error
-  properties: {font: DM Sans, font_size: 10, italic: true}
-  type: Label
 - components:
   - layout_properties: {}
     name: label_1
