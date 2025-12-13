@@ -73,6 +73,6 @@ class stress_q4(stress_q4Template):
     """This method is called when the text in this text box is edited"""
     self.live_validate()
 
-  def q3_back_btn_click(self, **event_args):
+  def q4_back_btn_click(self, **event_args):
     open_form('StressLevelPage.stress_q3')
     pass
