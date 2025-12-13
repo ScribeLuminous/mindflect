@@ -53,7 +53,7 @@ components:
         On average, how many hours do you spend on screens per day? (phone, laptop, TV, tablet, etc.)
         (input from 0 - 16 hours)
     type: Label
-  - event_bindings: {pressed_enter: stress_q3_ans_pressed_enter}
+  - event_bindings: {change: stress_q3_ans_change, pressed_enter: stress_q3_ans_pressed_enter}
     layout_properties: {col_xs: 4, row: NZBZAS, width_xs: 3}
     name: stress_q3_ans
     properties: {placeholder: 0 - 16}
