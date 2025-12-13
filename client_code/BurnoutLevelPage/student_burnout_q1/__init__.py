@@ -50,7 +50,7 @@ class student_burnout_q1(student_burnout_q1Template):
       open_form("StressLevelPage.stress_q2")
       # No 'else' needed, as live_validate handles error display
 
-  def q1_next_btn_click(self, **event_args):
+  def stu_q1_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
 
   def burnout_student_q1_ans_pressed_enter(self, **event_args):
