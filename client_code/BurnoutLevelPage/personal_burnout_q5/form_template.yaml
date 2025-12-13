@@ -54,7 +54,7 @@ components:
   - event_bindings: {change: burnout_personal_q5_ans_change, pressed_enter: burnout_personal_q5_ans_pressed_enter}
     layout_properties: {col_xs: 6, row: JTPUOU, width_xs: 3}
     name: burnout_personal_q5_ans
-    properties: {font: DM Sans, font_size: 15, placeholder: 0 - 12}
+    properties: {font: DM Sans, font_size: 15, placeholder: 0 - 10}
     type: TextBox
   layout_properties: {grid_position: 'EJXOIG,PUCJOS'}
   name: grid_panel_2
