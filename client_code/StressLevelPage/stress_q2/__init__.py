@@ -16,3 +16,7 @@ class stress_q2(stress_q2Template):
   def q2_next_btn_click(self, **event_args):
     open_form("StressLevelPage.stress_q3")
     pass
+
+  def stress_q2_ans_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
+    pass

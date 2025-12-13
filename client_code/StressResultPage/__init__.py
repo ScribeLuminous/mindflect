@@ -28,6 +28,10 @@ class StressResultPage(StressResultPageTemplate):
     angle = 180 + (percent / 100) * 180
     c.arc(150, 150, 120, 180, angle, fill="#41b8d5")
 
+  def plot_1_click(self, points, **event_args):
+    """This method is called when a data point is clicked."""
+    pass
+
 def get_explanation(self, level):
   if level == "Low":
     return (

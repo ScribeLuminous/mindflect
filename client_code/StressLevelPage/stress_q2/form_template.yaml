@@ -46,7 +46,8 @@ components:
     name: sublabel
     properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'About how many minutes of physical activity or exercise do you get per day?'}
     type: Label
-  - layout_properties: {col_xs: 4, row: VIHVTG, width_xs: 3}
+  - event_bindings: {pressed_enter: stress_q2_ans_pressed_enter}
+    layout_properties: {col_xs: 4, row: VIHVTG, width_xs: 3}
     name: stress_q2_ans
     properties: {placeholder: 0 - 60}
     type: TextBox
