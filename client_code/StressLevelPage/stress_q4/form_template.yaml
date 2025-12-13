@@ -42,18 +42,37 @@ components:
       spacing_below: none
       text: 🥗 4. Diet Quality
     type: Label
-  - layout_properties: {col_xs: 0, row: TSKFZW, width_xs: 12}
+  - data_bindings: []
+    layout_properties: {col_xs: 0, row: TFCAKV, width_xs: 12}
     name: sublabel
-    properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'How would you rate the overall quality of your diet over the past week?'}
+    properties:
+      align: center
+      font: PT Serif
+      font_size: 18
+      spacing:
+        padding: [null, null, 0, null]
+      spacing_below: large
+      text: |
+        How would you rate the overall quality of your diet over the past week?
+    type: Label
+  - layout_properties: {col_xs: 1, row: KIXFST, width_xs: 9}
+    name: label_1
+    properties:
+      align: left
+      font: DM Sans
+      font_size: 13
+      text: "1 - very poor (ultra-processed foods, fast food, and sugary drinks) \n5 - average/moderate (mixed diet, some fruits/veggies, snacks, desserts, or convenience meals daily)\n10 - excellent (whole, unprocessed foods, minimal sugar or saturated fat)\n"
     type: Label
   - event_bindings: {pressed_enter: stress_q4_ans_pressed_enter}
-    layout_properties: {col_xs: 4, row: AJWTBW, width_xs: 3}
+    layout_properties: {col_xs: 4, row: PRUCKR, width_xs: 3}
     name: stress_q4_ans
-    properties: {placeholder: 0 - 10}
+    properties: {placeholder: 1 - 10}
     type: TextBox
-  layout_properties: {grid_position: 'KQIFGK,LKUYHK'}
+  layout_properties: {grid_position: 'OERNTJ,OLGCVF'}
   name: grid_panel_2
-  properties: {}
+  properties:
+    spacing:
+      padding: [0, null, 0, null]
   type: GridPanel
 - layout_properties: {grid_position: 'DXVUWZ,UKCIHX'}
   name: label_error

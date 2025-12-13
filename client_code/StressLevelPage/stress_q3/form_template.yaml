@@ -44,7 +44,14 @@ components:
     type: Label
   - layout_properties: {col_xs: 0, row: BNIZSF, width_xs: 12}
     name: sublabel
-    properties: {align: center, font: PT Serif, font_size: 18, spacing_below: large, text: 'On average, how many hours do you spend on screens per day? (phone, laptop, TV, tablet, etc.)'}
+    properties:
+      align: center
+      font: PT Serif
+      font_size: 18
+      spacing_below: large
+      text: |
+        On average, how many hours do you spend on screens per day? (phone, laptop, TV, tablet, etc.)
+        (input from 0 - 16 hours)
     type: Label
   - event_bindings: {pressed_enter: stress_q3_ans_pressed_enter}
     layout_properties: {col_xs: 4, row: NZBZAS, width_xs: 3}

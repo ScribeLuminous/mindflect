@@ -53,7 +53,18 @@ components:
         How would you describe your overall mood recently?
         (1 - lowest  |  10 - highest)
     type: Label
-  - event_bindings: {pressed_enter: stress_q5_ans_pressed_enter}
+  - layout_properties: {col_xs: 2, row: FBMUSI, width_xs: 7}
+    name: label_1
+    properties:
+      align: left
+      font: DM Sans
+      font_size: 13
+      text: |
+        1 - Very Low: Depressed, stressed, anxious, or irritable.
+        5 - Neutral/Stable: Generally "okay"; stable but low energy.
+        10 - Very Positive: Happy, optimistic, high energy, and resilient.
+    type: Label
+  - event_bindings: {pressed_enter: stress_q6_ans_pressed_enter}
     layout_properties: {col_xs: 4, row: TKEXUB, width_xs: 3}
     name: stress_q6_ans
     properties: {placeholder: 1 - 10}
