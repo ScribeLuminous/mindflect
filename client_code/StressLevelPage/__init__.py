@@ -9,3 +9,11 @@ class StressLevelPage(StressLevelPageTemplate):
     # This is the only line that matters here
     open_form("StressLevelPage.stress_q1") 
     pass
+
+  def login_btn_click(self, **event_args):
+    open_form("Account") 
+    pass
+
+  def home_btn_click(self, **event_args):
+    open_form("MainPage") 
+    pass

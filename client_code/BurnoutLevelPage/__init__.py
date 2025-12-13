@@ -55,3 +55,7 @@ class BurnoutLevelPage(BurnoutLevelPageTemplate):
     """This method is called when any radio button is selected"""
     # We can use this to hide the error message immediately after a selection is made
     self.label_error.visible = False
+
+  def home_btn_click(self, **event_args):
+    open_form("MainPage")
+    pass

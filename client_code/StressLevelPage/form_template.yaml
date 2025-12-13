@@ -6,6 +6,7 @@ components:
       properties: {height: 55.87109375, source: _/theme/mindflect-removebg-preview.png}
       type: Image
     - data_bindings: []
+      event_bindings: {click: home_btn_click}
       layout_properties: {col_xs: 8, row: BFFRBJ, width_xs: 2}
       name: home_btn
       properties:
@@ -22,6 +23,7 @@ components:
         text: main page
       type: Button
     - data_bindings: []
+      event_bindings: {click: login_btn_click}
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
       name: login_btn
       properties:

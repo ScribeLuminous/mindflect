@@ -1,4 +1,4 @@
-# --- assessment_logic module ---
+# --- assessment_logic module (FIXED) ---
 # --- GLOBAL STORAGE ---
 user_data = {
   "sleep_hours": None,
@@ -9,29 +9,38 @@ user_data = {
   "mood_level_1_10": None
 }
 
-# --- VALIDATION ---
-def validate_input(value_str, min_val, max_val):
+# --- VALIDATION (FIXED) ---
+def validate_input(value_str, min_val, max_val, require_integer=False): 
   if value_str is None or str(value_str).strip() == "":
     return False, "Please enter a number."
 
   try:
-    val = int(value_str)
+    # 1. First, safely try to parse as a float (allows '2' and '2.5')
+    val = float(value_str)
+
+    # 2. If require_integer is True, check if the float has a decimal part.
+    if require_integer and val != int(val):
+      return False, "Only whole numbers are allowed."
+
+      # 3. Check Range (THIS MUST BE INSIDE THE TRY BLOCK)
+    if not (min_val <= val <= max_val):
+      return False, f"Value must be between {min_val} and {max_val}."
+
+      # 4. Success: Return True and the parsed numeric value
+    return True, val
+
   except ValueError:
-    return False, "Only whole numbers are allowed."
-
-  if not (min_val <= val <= max_val):
-    return False, f"Value must be between {min_val} and {max_val}."
-
-  return True, val
-
+    # Catch non-numeric input (letters, symbols)
+    return False, "Please enter a valid number."
 
 # --- FINAL CALCULATION ---
+# ... (rest of the file remains unchanged) ...
 def calculate_total_stress():
   for key, val in user_data.items():
     if val is None:
       raise ValueError("All questions must be answered.")
 
-  # 1. Sleep (inverse)
+    # 1. Sleep (inverse)
   score_sleep = max(0, min(100, (8 - user_data["sleep_hours"]) * 25))
 
   # 2. Exercise (inverse)
