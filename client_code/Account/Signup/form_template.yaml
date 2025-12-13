@@ -6,9 +6,8 @@ components:
       properties: {height: 55.87109375, source: _/theme/mindflect-removebg-preview.png}
       type: Image
     - data_bindings: []
-      event_bindings: {click: login_btn_click}
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: login_btn
+      name: account_btn
       properties:
         align: right
         background: '#0097b2'
@@ -29,8 +28,8 @@ components:
   name: linear_panel_1
   properties: {}
   type: LinearPanel
-- layout_properties: {grid_position: 'AONXAG,OFAFJA'}
-  name: main_lbl
+- layout_properties: {grid_position: 'EVRNMF,LHBAMH'}
+  name: greet_lbl
   properties:
     align: center
     bold: true
@@ -40,25 +39,71 @@ components:
       padding: [10, 0, 0, null]
     spacing_above: medium
     spacing_below: none
-    text: "how are you \ntoday?"
+    text: Sign Up Page
   type: Label
-- layout_properties: {grid_position: 'SURQLO,QIPYYT'}
-  name: sublabel
+- layout_properties: {grid_position: 'NYXEBJ,DZURJV'}
+  name: greet_lbl_copy
   properties:
-    align: center
-    font: DM Sans
-    font_size: 18
-    spacing_below: large
-    text: "your easy companion to track your \nstress and burnout levels"
+    align: left
+    bold: false
+    font: PT Serif
+    font_size: 25
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: medium
+    spacing_below: none
+    text: 'Enter a username:'
   type: Label
-- data_bindings: []
-  event_bindings: {click: reflect_btn_click}
-  layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
-  name: reflect_btn
-  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: reflect}
-  type: Button
-- layout_properties: {grid_position: 'HZRVOO,HWVWEA'}
+- layout_properties: {grid_position: 'HSMADS,JPYURF'}
+  name: username_txb
+  properties: {enabled: true, height: 39, visible: true}
+  type: TextArea
+- layout_properties: {grid_position: ''}
+  name: greet_lbl_copy_copy
+  properties:
+    align: left
+    bold: false
+    font: PT Serif
+    font_size: 25
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: medium
+    spacing_below: none
+    text: 'Enter a password:'
+  type: Label
+- layout_properties: {grid_position: ''}
+  name: password_txb
+  properties: {enabled: true, height: 39, visible: true}
+  type: TextArea
+- layout_properties: {grid_position: 'HFUPWD,GRPQSP'}
+  name: greet_lbl_copy_copy_copy
+  properties:
+    align: left
+    bold: false
+    font: PT Serif
+    font_size: 25
+    spacing:
+      padding: [10, 0, 0, null]
+    spacing_above: medium
+    spacing_below: none
+    text: 'Confirm password:'
+  type: Label
+- layout_properties: {grid_position: 'FJNKMD,WJMFOG'}
+  name: password_txb_copy
+  properties: {enabled: true, height: 39, visible: true}
+  type: TextArea
+- layout_properties: {grid_position: 'FAXVTU,GLADAS'}
   name: spacer_1
+  properties: {height: 32}
+  type: Spacer
+- data_bindings: []
+  event_bindings: {click: signup_btn_click}
+  layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
+  name: signup_btn
+  properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:pencil', text: sign up}
+  type: Button
+- layout_properties: {grid_position: 'MFUOAR,UEYKOZ'}
+  name: spacer_1_copy
   properties: {height: 32}
   type: Spacer
 - components:
@@ -67,7 +112,6 @@ components:
     properties:
       align: center
       bold: true
-      font_size: 20
       foreground: '#d9d9d9'
       spacing:
         padding: [8, null, null, null]
@@ -82,7 +126,7 @@ components:
       align: center
       bold: false
       font: PT Serif
-      font_size: 12
+      font_size: 11
       foreground: '#d9d9d9'
       italic: false
       spacing_above: none

@@ -13,6 +13,6 @@ class BurnoutLevelPage(BurnoutLevelPageTemplate):
 
     # Any code you write here will run before the form opens.
 
-  def stress_con_click(self, **event_args):
-    open_form("StressLevelPage.stress_q1")
+  def burnout_con_click(self, **event_args):
+    open_form("BurnoutLevelPage.burnout_q1")
     pass

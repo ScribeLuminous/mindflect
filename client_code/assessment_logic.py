@@ -6,11 +6,11 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import math
 
-# --- GLOBAL STORAGE (For all your answers) ---
+# --- GLOBAL STORAGE ---
 user_data = {
-  "sleep_hours": 0,          # Must be key: value pair
-  "daily_exercise_mins": 0, 
-  "screen_time_hours": 0,    
+  "sleep_hours": 0,
+  "daily_exercise_mins": 0,
+  "screen_time_hours": 0,
   "diet_quality_1_10": 1,
   "productivity_score_1_10": 1,
   "mood_level_1_10": 1
@@ -18,26 +18,18 @@ user_data = {
 
 # --- VALIDATION UTILITY ---
 def validate_input(value_str, min_val, max_val):
-  """
-    Checks if a string input is a valid number within the min/max range.
-    Returns (True, numeric_value) on success, or (False, error_message) on failure.
-    """
-  if not value_str:
-    return (False, "Please enter a value.")
+  if value_str == 0 or value_str.strip() == "":
+    return (False, "Please enter a number.")
 
-  try:
-    # Try to convert to float/int
-    val = float(value_str)
-    if val == int(val):
-      val = int(val) # Keep as int if it's a whole number
+  if not value_str.isdigit():
+    return (False, "Only whole numbers are allowed.")
 
-  except ValueError:
-    return (False, "Input must be a number.")
+  val = int(value_str)
 
-  if min_val <= val <= max_val:
-    return (True, val)
-  else:
+  if val < min_val or val > max_val:
     return (False, f"Value must be between {min_val} and {max_val}.")
+
+  return (True, val)
 
 
 # --- FEEDBACK UTILITY (For individual forms if needed) ---
@@ -58,31 +50,42 @@ def get_feedback(val, min_val, max_val):
 # --- FINAL CALCULATION ---
 def calculate_total_stress():
   """
-  Normalizes all inputs to a 0-100 Stress Scale and returns the average.
-  0 = Zen/Relaxed, 100 = Maximum Stress
+  Calculates stress ONLY if all inputs are present.
   """
-  data = user_data 
+  data = user_data
 
-  # 1. Sleep Logic (Inverse)
-  val_sleep = float(data['sleep_hours'])
-  score_sleep = max(0, min(100, (8 - val_sleep) * 25))
+  # 🔒 Guard clause
+  for key, val in data.items():
+    if val is None:
+      raise ValueError("All questions must be answered before calculating stress.")
 
-  # 2. Exercise Logic (Inverse)
-  val_exercise = float(data['daily_exercise_mins'])
-  score_exercise = max(0, min(100, (60 - val_exercise) * 1.6))
+  # ---- NORMALIZED SCORING ----
 
-  # 3. Screen Time Logic (Direct)
-  val_screen = float(data['screen_time_hours'])
-  score_screen = max(0, min(100, (val_screen / 12) * 100))
+  # 1. Sleep (inverse)
+  score_sleep = max(0, min(100, (8 - data['sleep_hours']) * 25))
 
-  # 4. Subjective Scales (Inverse: 10 is 0 stress)
+  # 2. Exercise (inverse)
+  score_exercise = max(0, min(100, (60 - data['daily_exercise_mins']) * 1.6))
+
+  # 3. Screen time (direct, corrected to 16h max)
+  score_screen = max(0, min(100, (data['screen_time_hours'] / 16) * 100))
+
+  # 4–6. Subjective scales
   score_diet = (10 - data['diet_quality_1_10']) * 11
   score_prod = (10 - data['productivity_score_1_10']) * 11
   score_mood = (10 - data['mood_level_1_10']) * 11
 
-  # Average
-  total_score = (score_sleep + score_exercise + score_screen + score_diet + score_prod + score_mood) / 6
+  total_score = (
+    score_sleep +
+    score_exercise +
+    score_screen +
+    score_diet +
+    score_prod +
+    score_mood
+  ) / 6
+
   return round(total_score, 1)
+
 
 def get_result_feedback(final_score):
   """Returns the text label and color based on the total score thresholds."""
@@ -92,3 +95,18 @@ def get_result_feedback(final_score):
     return {"level": "Moderate Stress", "color": "#FF9800", "msg": "You are under pressure."}
   else:
     return {"level": "High Stress", "color": "#F44336", "msg": "Critical levels detected."}
+
+
+@anvil.server.callable
+def save_daily_stress(score, level, inputs):
+  user = anvil.users.get_user()
+  if not user:
+    raise Exception("User not logged in")
+
+  app_tables.stress_logs.add_row(
+    user=user,
+    date=datetime.date.today(),
+    stress_score=score,
+    stress_level=level,
+    inputs=inputs
+  )

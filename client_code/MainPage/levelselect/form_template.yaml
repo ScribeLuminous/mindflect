@@ -6,6 +6,24 @@ components:
       properties: {height: 55.87109375, source: _/theme/mindflect-removebg-preview.png}
       type: Image
     - data_bindings: []
+      event_bindings: {click: home_btn_click}
+      layout_properties: {col_xs: 8, row: BFFRBJ, width_xs: 2}
+      name: home_btn
+      properties:
+        align: right
+        background: '#0097b2'
+        bold: false
+        border: '#41b8d5'
+        font: DM Sans
+        foreground: '#efe9ce'
+        icon: fa:home
+        spacing:
+          padding: [null, 28, 5, null]
+        spacing_above: medium
+        text: main page
+      type: Button
+    - data_bindings: []
+      event_bindings: {click: login_btn_click}
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
       name: login_btn
       properties:
@@ -15,11 +33,11 @@ components:
         border: '#41b8d5'
         font: DM Sans
         foreground: '#efe9ce'
-        icon: fa:chevron-right
+        icon: fa:user-circle
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: login
+        text: account
       type: Button
     name: grid_panel_1
     properties: {}
@@ -50,6 +68,7 @@ components:
       properties: {align: center, font: DM Sans, font_size: 25, spacing_above: medium, spacing_below: large, text: 'Exhausted even after rest?'}
       type: Label
     - data_bindings: []
+      event_bindings: {click: burnout_btn_click}
       layout_properties: {col_xs: 0, row: SRGLWX, width_xs: 12}
       name: burnout_btn
       properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:check-circle', text: check burnout}

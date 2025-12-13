@@ -15,3 +15,11 @@ class MainPage(MainPageTemplate):
   def reflect_btn_click(self, **event_args):
     open_form("MainPage.levelselect")
     pass
+
+  def home_btn_click(self, **event_args):
+    open_form("MainPage")
+    pass
+
+  def login_btn_click(self, **event_args):
+    open_form("Account.Login")
+    pass

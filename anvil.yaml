@@ -14,11 +14,11 @@ db_schema:
       type: string
     server: full
     title: Files
-  levels:
+  stress_logs:
     client: none
     columns: []
     server: full
-    title: Levels
+    title: Stress_Logs
   users:
     client: none
     columns: []

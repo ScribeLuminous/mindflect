@@ -15,3 +15,15 @@ class levelselect(levelselectTemplate):
   def stress_btn_click(self, **event_args):
     open_form("StressLevelPage")
     pass
+
+  def burnout_btn_click(self, **event_args):
+    open_form("BurnoutLevelPage")
+    pass
+
+  def home_btn_click(self, **event_args):
+    open_form('MainPage')
+    pass
+
+  def login_btn_click(self, **event_args):
+    open_form('Account.Login')
+    pass
