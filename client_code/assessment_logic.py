@@ -15,6 +15,34 @@ user_data = {
     "current_situation": None
 }
 
+# --- BURNOUT STORAGE ---
+burnout_data = {
+  "burnout_role": None,
+
+  # STUDENT
+  "study_hours_per_day": None,
+  "mental_health_rating": None,
+  "social_media_hours": None,
+  "attendance_percentage": None,
+  "exam_score": None,
+  "extracurricular_participation": None,
+
+  # WORK
+  "WORK_LIFE_BALANCE_SCORE": None,
+  "DAILY_STRESS_WORK": None,
+  "LOST_VACATION": None,
+  "SUFFICIENT_INCOME": None,
+
+  # PERSONAL
+  "DAILY_STRESS": None,
+  "SLEEP_HOURS": None,
+  "DAILY_SHOUTING": None,
+  "DAILY_STEPS": None,
+  "FRUITS_VEGGIES": None,
+  "TIME_FOR_PASSION": None
+}
+
+
 # -----------------------------
 # VALIDATION
 # -----------------------------

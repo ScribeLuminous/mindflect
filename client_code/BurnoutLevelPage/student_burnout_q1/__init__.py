@@ -15,14 +15,14 @@ class student_burnout_q1(student_burnout_q1Template):
     self.init_components(**properties)
     self.label_error.visible = False
     self.q1_next_btn.enabled = False  # Disable the Next button initially
-    self.stress_q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
+    self.q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
 
     # Initial check to see if the default value is valid
     self.live_validate()
 
   def live_validate(self):
     """Validates input instantly (0-12, allows float) and toggles error/Next button."""
-    input_str = self.stress_q1_ans.text
+    input_str = self.q1_ans.text
 
     # Validation: MIN 0, MAX 12
     # Note: We do not check for int() here, as sleep hours can be a decimal (e.g., 7.5)
@@ -44,10 +44,10 @@ class student_burnout_q1(student_burnout_q1Template):
     if self.live_validate():
       # Data is valid, save it and advance
       # Re-running validation just to get the final numeric result (result)
-      _, result = assessment_logic.validate_input(self.stress_q1_ans.text, 0, 12)
+      _, result = assessment_logic.validate_input(self. _q1_ans.text, 0, 12)
 
       assessment_logic.user_data["sleep_hours"] = result
-      open_form("StressLevelPage.stress_q2")
+      open_form(" LevelPage. _q2")
       # No 'else' needed, as live_validate handles error display
 
   def stu_q1_next_btn_click(self, **event_args):

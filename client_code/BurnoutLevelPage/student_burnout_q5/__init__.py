@@ -53,12 +53,12 @@ class student_burnout_q5(student_burnout_q5Template):
   def q1_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_student_q6_ans_pressed_enter(self, **event_args):
+  def q5_ans_pressed_enter(self, **event_args):
     self.handle_input_and_advance()
 
     # --- THIS IS THE FUNCTION YOU ASKED FOR ---
 
-  def burnout_student_q6_ans_change(self, **event_args):
+  def q5_ans_change(self, **event_args):
     """This method is called when the text in this text box is edited"""
     self.live_validate()
 
