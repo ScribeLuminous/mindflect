@@ -2,6 +2,7 @@
 
 from ._anvil_designer import work_burnout_q1Template
 from anvil import *
+import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -64,4 +65,12 @@ class work_burnout_q1(work_burnout_q1Template):
 
   def home_btn_click(self, **event_args):
     """This method is called when the button is clicked"""
+    pass
+
+  def q1_ans_change(self, **event_args):
+    """This method is called when the text in this text box is edited"""
+    pass
+
+  def q1_ans_pressed_enter(self, **event_args):
+    """This method is called when the user presses Enter in this text box"""
     pass

@@ -2,6 +2,7 @@
 
 from ._anvil_designer import stress_q4Template
 from anvil import *
+import anvil.users
 from ... import assessment_logic
 import anvil.tables as tables
 import anvil.tables.query as q

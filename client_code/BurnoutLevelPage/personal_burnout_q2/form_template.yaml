@@ -20,7 +20,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: main page
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}

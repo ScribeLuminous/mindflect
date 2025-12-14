@@ -106,7 +106,7 @@ def log_burnout_assessment(burnout_index, guidance, user_inputs):
   app_tables.burnout_logs.add_row(
     users=current_user,
     date=anvil.tz.now(),
-    burnout_index=burnout_index,
+    burnout_index=burnout_score,
     guidance=guidance, 
     # Add specific burnout scores (e.g., exhaustion, cynicism) from user_inputs
     # exhaustion_score=user_inputs.get("exhaustion_score"), 
@@ -114,3 +114,46 @@ def log_burnout_assessment(burnout_index, guidance, user_inputs):
   )
 
   return {"ok": True}
+
+@anvil.server.callable
+def get_user_history():
+  """
+    Fetches historical scores for the logged-in user for graphs.
+    Returns two lists: one for stress, one for burnout.
+    """
+  user = anvil.users.get_user()
+  if not user:
+    return None, None
+
+    # 1. Fetch Stress Logs (Sorted by date)
+  stress_rows = app_tables.stress_logs.search(
+    tables.order_by("date"),
+    users=user
+  )
+
+  # Format for Plotly: [Date, Score]
+  stress_history = [
+    {
+      "date": r['date'], 
+      "score": r['total_score']
+    } 
+    for r in stress_rows
+  ]
+
+  # 2. Fetch Burnout Logs (Sorted by date)
+  # Ensure you have a 'burnout_logs' table created!
+  burnout_rows = app_tables.burnout_logs.search(
+    tables.order_by("date"),
+    users=user
+  )
+
+  burnout_history = [
+    {
+      "date": r['date'], 
+      # Make sure to use the correct column name from your table
+      "score": r['burnout_score'] 
+    } 
+    for r in burnout_rows
+  ]
+
+  return stress_history, burnout_history

@@ -2,6 +2,7 @@
 
 from ._anvil_designer import work_burnout_q2Template
 from anvil import *
+import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -63,5 +64,13 @@ class work_burnout_q2(work_burnout_q2Template):
     self.live_validate()
 
   def home_btn_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
+
+  def q2_next_btn_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
+
+  def q2_back_btn_click(self, **event_args):
     """This method is called when the button is clicked"""
     pass

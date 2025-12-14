@@ -20,7 +20,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: main page
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}
@@ -71,13 +71,13 @@ components:
   type: Spacer
 - components:
   - data_bindings: []
-    event_bindings: {click: q2_back_btn_click}
+    event_bindings: {click: q4_back_btn_click}
     layout_properties: {col_xs: 2, row: BATUJD, width_xs: 3}
     name: q4_back_btn
     properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:arrow-left', text: back}
     type: Button
   - data_bindings: []
-    event_bindings: {click: q2_next_btn_click}
+    event_bindings: {click: q4_next_btn_click}
     layout_properties: {col_xs: 7, row: BATUJD, width_xs: 3}
     name: q4_next_btn
     properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:arrow-right', text: next}

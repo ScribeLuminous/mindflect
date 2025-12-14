@@ -35,17 +35,17 @@ components:
     align: center
     bold: true
     font: PT Serif
-    font_size: 50
+    font_size: 40
     spacing:
       padding: [10, 0, 0, null]
     spacing_above: medium
     spacing_below: none
-    text: 'hello, '
+    text: ''
   type: Label
 - components:
   - components:
     - layout_properties: {grid_position: 'WGSMNK,WBBUXG'}
-      name: sublabel
+      name: stress_lbl
       properties: {align: center, bold: true, font: DM Sans, font_size: 18, spacing_below: large, text: STRESS LEVELS}
       type: Label
     layout_properties: {col_xs: 3, row: EMUINT, width_xs: 6}
@@ -55,7 +55,8 @@ components:
         margin: [null, null, 0, null]
         padding: [null, null, 14, null]
     type: ColumnPanel
-  - layout_properties: {col_xs: 1, row: DGHXJF, width_xs: 10}
+  - event_bindings: {click: stress_plot_click}
+    layout_properties: {col_xs: 1, row: DGHXJF, width_xs: 10}
     name: stress_plot
     properties: {height: 292}
     type: Plot
@@ -69,11 +70,12 @@ components:
   type: Spacer
 - components:
   - layout_properties: {col_xs: 3, row: SIHEWS, width_xs: 6}
-    name: sublabel_copy_2
+    name: burnout_lbl
     properties: {align: center, bold: true, font: DM Sans, font_size: 18, spacing_below: large, text: BURNOUT LEVELS}
     type: Label
-  - layout_properties: {col_xs: 1, row: DGHXJF, width_xs: 10}
-    name: stress_plot_copy
+  - event_bindings: {click: burnout_plot_click}
+    layout_properties: {col_xs: 1, row: DGHXJF, width_xs: 10}
+    name: burnout_plot
     properties: {height: 292}
     type: Plot
   layout_properties: {grid_position: 'VJBFLE,HCZVMJ'}

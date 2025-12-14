@@ -20,7 +20,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: main page
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}
@@ -54,7 +54,7 @@ components:
         5 - 7: Neutral/Stable: Generally "okay"
         8 - 10:  Always
     type: Label
-  - event_bindings: {change: burnout_personal_q6_ans_change, pressed_enter: burnout_personal_q6_ans_pressed_enter}
+  - event_bindings: {change: personal_burnout_q6_ans_change, pressed_enter: personal_burnout_q6_ans_pressed_enter}
     layout_properties: {col_xs: 6, row: JTPUOU, width_xs: 3}
     name: personal_burnout_q6_ans
     properties: {font: DM Sans, font_size: 15, placeholder: 0 - 10}

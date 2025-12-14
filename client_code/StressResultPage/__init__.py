@@ -1,13 +1,17 @@
-# -- StressResultPage.py (FINAL, WORKING CODE) --
+# -- StressResultPage.py (FINAL, FIXED IMPORT) --
 
 from ._anvil_designer import StressResultPageTemplate
 from anvil import *
 import plotly.graph_objects as go
 import anvil.server
+import anvil.users 
+
 import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 import math
+
+from .. import assessment_logic 
 
 class StressResultPage(StressResultPageTemplate):
   def __init__(self, result, score, **properties):
@@ -22,11 +26,11 @@ class StressResultPage(StressResultPageTemplate):
     # Use the level (e.g., "Low Stress") for the title
     self.title_lbl.text = result['level']
 
-    # Use the result's color for styling if you've set it up
-    # NOTE: This line requires 'color' key in 'result' dict, if error occurs, comment it out.
-    # self.percent_lbl.foreground = result['color'] 
+    # Use the result's color for styling if provided
+    if 'color' in result:
+      self.percent_lbl.foreground = result['color'] 
 
-    # Use score_int for the gauge
+      # Use score_int for the gauge
     self.draw_gauge(score_int)
 
     # Set the Explanation Label
@@ -39,16 +43,12 @@ class StressResultPage(StressResultPageTemplate):
   def draw_gauge(self, percent):
     c = self.gauge_canvas
 
-    # NOTE: Clear is not a standard method, but we can reset the drawing context 
-    # for a clean start if needed, though for a simple static gauge, redrawing is enough.
-    # c.reset_context() 
-
     # --- DRAW BACKGROUND ARC ---
     c.begin_path()
-    c.arc(150, 150, 120, 180 * math.pi / 180, 360 * math.pi / 180) # Angles in radians
-    c.line_width = 25 # Set line width for a thick arc
+    c.arc(150, 150, 120, 180 * math.pi / 180, 360 * math.pi / 180) 
+    c.line_width = 25 
     c.line_cap = "round"
-    c.stroke_style = "#e6e6e6" # Set the color
+    c.stroke_style = "#e6e6e6" 
     c.stroke()
     c.close_path()
 
@@ -57,114 +57,78 @@ class StressResultPage(StressResultPageTemplate):
     angle_end_rad = (180 + (percent / 100) * 180) * math.pi / 180
 
     c.begin_path()
-    c.arc(150, 150, 120, angle_start_rad, angle_end_rad) # Angles in radians
+    c.arc(150, 150, 120, angle_start_rad, angle_end_rad) 
     c.line_width = 25
     c.line_cap = "round"
-    c.stroke_style = "#41b8d5" # Set the color
+    c.stroke_style = "#41b8d5" 
     c.stroke()
     c.close_path()
 
   def plot_1_click(self, points, **event_args):
-    """This method is called when a data point is clicked."""
     pass
 
   def get_explanation(self, level):
-    # Using 'in level' allows matching "Low Stress" with "Low"
     if "Low" in level:
-      return (
-        "Your stress level appears to be low today. You have a good foundation "
-        "of healthy habits, which is highly protective against future stress buildup."
-      )
+      return "Your stress level appears to be low today. Keep maintaining healthy routines."
     elif "Moderate" in level:
-      return (
-        "Your stress level is moderate. You are handling current demands well, "
-        "but you are under pressure. Pay attention to early warning signs."
-      )
-    else: # High Stress
-      return (
-        "Your stress level is high today. This level can impact your health, "
-        "mood, and performance. Immediate action is recommended to reduce pressure."
-      )
+      return "Your stress level is moderate. You are handling current demands well but under pressure."
+    else:
+      return "Your stress level is high today. Immediate action is recommended to reduce pressure."
 
   def get_recommendations(self, level):
     if "Low" in level:
-      return (
-        "**Tips for Maintenance:**\n"
-        "- **Sleep:** Continue to prioritize 7-9 hours of sleep nightly.\n"
-        "- **Exercise:** Maintain your current routine or explore new enjoyable activities.\n"
-        "- **Diet:** Focus on variety and hydration to sustain energy."
-      )
+      return "**Tips:** Prioritize sleep and exercise."
     elif "Moderate" in level:
-      return (
-        "**Recommendations for Balance:**\n"
-        "- **Breaks:** Incorporate short, scheduled 5-minute mental breaks every hour.\n"
-        "- **Mindfulness:** Dedicate 10 minutes daily to deep breathing or meditation.\n"
-        "- **Screen Time:** Use screen-limiting apps after work hours to wind down."
-      )
-    else: # High Stress
-      return (
-        "**Urgent Action Plan:**\n"
-        "- **Prioritize Rest:** Reduce non-essential tasks to free up mental energy.\n"
-        "- **Hydrate & Nourish:** Focus on simple, nutrient-dense meals; avoid excess caffeine.\n"
-        "- **Reach Out:** Talk to a trusted friend or professional about your feelings."
-      )
+      return "**Tips:** Take short breaks and practice mindfulness."
+    else:
+      return "**Action Plan:** Prioritize rest and reduce non-essential tasks."
 
   def home_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
+    open_form('MainPage')
 
   def save_btn_click(self, **event_args):
-    import anvil.data_management
-    from .. import assessment_logic
-  
-    # 1️⃣ Calculate stress result
+    # FIX: REMOVED 'import anvil.data_management' - THIS WAS THE CAUSE OF THE ERROR
+
+    # 1. Calculate stress result logic
     try:
-      score = assessment_logic.calculate_total_stress()
-      result = assessment_logic.get_result_feedback(score)
+      # Note: assessment_logic.get_result_feedback() returns (result_dict, score)
+      # You are re-calculating here to ensure you have the latest data for saving
+      result_dict, score_val = assessment_logic.get_result_feedback()
     except Exception as e:
-      Notification("Please complete all questions before saving.", style="warning").show()
+      Notification("Error calculating results. Please ensure all questions are answered.", style="warning").show()
       return
-  
-    # 2️⃣ If NOT logged in → prompt user
+
+      # 2. Check Login
     if not anvil.users.get_user():
       choice = alert(
         "You need an account to save your stress history.",
-        buttons=[
-          ("Login", "login"),
-          ("Sign up", "signup"),
-          ("Cancel", None)
-        ],
+        buttons=[("Login", "login"), ("Sign up", "signup"), ("Cancel", None)],
         dismissible=True
       )
-  
+
       if choice == "login":
-        open_form("Login")
+        open_form("Account.Login") # Adjust if your login form name is different
       elif choice == "signup":
-        open_form("Signup")
-  
-      # 🚨 STOP execution if not logged in
+        open_form("Account.Signup") # Adjust if your signup form name is different
       return
-  
-    # 3️⃣ Save result (user IS logged in)
+
+      # 3. Save result via Server Call
     try:
+      # We call the server function by string name.
+      # The server module 'data_management' is loaded automatically on the server.
       response = anvil.server.call(
         "save_daily_stress",
-        score,
-        result["level"],
-        dict(assessment_logic.user_data)  # defensive copy
+        score_val,
+        result_dict["level"],
+        dict(assessment_logic.user_data) 
       )
-  
+
       if response and response.get("ok") is True:
         Notification("Stress saved for today 💙").show()
       else:
-        Notification(
-          "Could not save your stress result. Please try again.",
-          style="warning"
-        ).show()
-  
+        msg = response.get("msg", "Could not save.") if response else "Unknown error."
+        Notification(f"Save failed: {msg}", style="warning").show()
+
     except Exception as e:
-      print("Save error:", e)
-      Notification(
-        "An unexpected error occurred while saving.",
-        style="danger"
-      ).show()
+      print(f"Save error: {e}")
+      Notification("An unexpected error occurred while saving.", style="danger").show()

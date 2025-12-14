@@ -2,6 +2,7 @@
 
 from ._anvil_designer import stress_q5Template
 from anvil import *
+import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -57,3 +58,7 @@ class stress_q5(stress_q5Template):
 
   def q5_back_btn_click(self, **event_args):
     open_form('StressLevelPage.stress_q4')
+
+  def home_btn_click(self, **event_args):
+    open_form('MainPage')
+    pass

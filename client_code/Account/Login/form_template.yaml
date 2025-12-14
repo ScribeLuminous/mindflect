@@ -6,9 +6,9 @@ components:
       properties: {height: 55.87109375, source: _/theme/mindflect-removebg-preview.png}
       type: Image
     - data_bindings: []
-      event_bindings: {click: account_btn_click}
+      event_bindings: {click: home_btn_click}
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: account_btn
+      name: home_btn
       properties:
         align: right
         background: '#0097b2'
@@ -16,11 +16,11 @@ components:
         border: '#41b8d5'
         font: DM Sans
         foreground: '#efe9ce'
-        icon: fa:user-circle
+        icon: fa:home
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: account
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}
@@ -53,12 +53,12 @@ components:
       padding: [10, 0, 0, null]
     spacing_above: medium
     spacing_below: none
-    text: 'Username:'
+    text: 'Email address:'
   type: Label
-- layout_properties: {grid_position: 'HSMADS,JPYURF'}
-  name: username_txb
-  properties: {enabled: true, height: 39, visible: true}
-  type: TextArea
+- layout_properties: {grid_position: 'ELNXIQ,DBHWCU'}
+  name: email_box
+  properties: {font: DM Sans, font_size: 15}
+  type: TextBox
 - layout_properties: {grid_position: 'ZUMBWJ,IKPBKV'}
   name: greet_lbl_copy_copy
   properties:
@@ -72,62 +72,56 @@ components:
     spacing_below: none
     text: 'Password:'
   type: Label
-- layout_properties: {grid_position: 'QQBMVC,GZLNZW'}
-  name: password_txb
-  properties: {enabled: true, height: 39, visible: true}
-  type: TextArea
+- layout_properties: {grid_position: 'IJUTFA,SIDAHQ'}
+  name: password_box
+  properties: {font: DM Sans, font_size: 15, hide_text: true}
+  type: TextBox
 - layout_properties: {grid_position: 'FAXVTU,GLADAS'}
   name: spacer_1
   properties: {height: 32}
   type: Spacer
+- layout_properties: {grid_position: 'WXOMVH,FVSDVQ'}
+  name: error_lbl
+  properties: {font: DM Sans, font_size: 10, italic: true}
+  type: Label
 - data_bindings: []
   event_bindings: {click: login_btn_click}
   layout_properties: {grid_position: 'TGPQUM,NTPRKD'}
   name: login_btn
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:pencil', text: login}
   type: Button
+- layout_properties: {grid_position: 'RNFNJF,WXOVLE'}
+  name: spacer_1_copy
+  properties: {height: 20}
+  type: Spacer
 - components:
-  - layout_properties: {col_xs: 3, row: PMMAXJ, width_xs: 3}
+  - layout_properties: {col_xs: 8, row: AQYDFR, width_xs: 2}
     name: acc_lbl
     properties:
-      align: right
+      align: left
       bold: false
       font: PT Serif
       font_size: 12
       spacing:
-        padding: [10, 0, 0, null]
+        margin: [15, null, null, null]
+        padding: [0, 0, 0, null]
       spacing_above: medium
       spacing_below: none
       text: don't have an account?
     type: Label
-  - layout_properties: {col_xs: 6, row: PMMAXJ, width_xs: 3}
-    name: acc_lbl_copy
-    properties:
-      align: left
-      bold: true
-      font: PT Serif
-      font_size: 12
-      spacing:
-        padding: [10, 0, 0, null]
-      spacing_above: medium
-      spacing_below: none
-      text: sign up here
-    type: Label
-  layout_properties: {grid_position: 'PZAXJS,WVSUFG'}
+  - data_bindings: []
+    event_bindings: {click: account_btn_click}
+    layout_properties: {col_xs: 10, row: AQYDFR, width_xs: 2}
+    name: account_btn
+    properties: {align: left, background: '#e0fe9c', bold: true, font: DM Sans, font_size: 12, foreground: '#523d72', icon: 'fa:pencil', text: sign up}
+    type: Button
+  layout_properties: {grid_position: 'RFXCQK,XXGNMM'}
   name: grid_panel_2
   properties:
     spacing:
       margin: [0, null, 0, null]
       padding: [0, null, 0, null]
   type: GridPanel
-- layout_properties: {grid_position: 'IPMTPZ,BZOZRQ'}
-  name: label_error
-  properties: {font: DM Sans, font_size: 10, italic: true}
-  type: Label
-- layout_properties: {grid_position: 'MFUOAR,UEYKOZ'}
-  name: spacer_1_copy
-  properties: {height: 32}
-  type: Spacer
 - components:
   - layout_properties: {}
     name: label_1

@@ -1,5 +1,7 @@
 from ._anvil_designer import StressLevelPageTemplate
 from anvil import *
+import anvil.server
+import anvil.users
 
 class StressLevelPage(StressLevelPageTemplate):
   def __init__(self, **properties):

@@ -1,9 +1,7 @@
-# --- assessment_logic.py (COMPLETE AND CORRECTED) ---
+# --- assessment_logic.py (FINAL FIXED VERSION) ---
 
 import anvil.server
-import anvil.data_management
-import anvil.stress_server
-import anvil.burnout_server
+import anvil.users
 
 # =============================
 # GLOBAL STORAGE
@@ -54,7 +52,7 @@ burnout_data = {
 }
 
 # =============================
-# THRESHOLDS (New Helper Structures)
+# THRESHOLDS
 # =============================
 
 STRESS_THRESHOLDS = {
@@ -93,23 +91,11 @@ def validate_input(value_str, min_val, max_val, require_integer=False):
   return True, val
 
 # =============================
-# STRESS CALCULATION (Updated to match thresholds and include final function)
+# STRESS CALCULATION
 # =============================
 
 def calculate_total_stress():
-  for key in [
-    "sleep_hours",
-    "daily_exercise_mins",
-    "screen_time_hours",
-    "diet_quality_1_10",
-    "productivity_score_1_10",
-    "mood_level_1_10"
-  ]:
-    if user_data[key] is None:
-      # We must use 'burnout_data' here if that's what's passed, 
-      # but assuming 'user_data' is for the dedicated Stress track
-      continue # Allow calculation even if some keys are None if you haven't answered all
-      # raise ValueError("All stress questions must be answered.") 
+  # FIX: Access user_data directly (removed 'assessment_logic.' prefix)
 
   score_sleep = max(0, min(100, (8 - (user_data["sleep_hours"] or 8)) * 25))
   score_exercise = max(0, min(100, (60 - (user_data["daily_exercise_mins"] or 60)) * 1.6))
@@ -137,116 +123,114 @@ def get_stress_level(score):
   return {"level": "Undefined Stress", "color": "#808080"} 
 
 
-  def get_result_feedback(): 
-    """Calculates the final stress score, level, and returns the result dict for the form."""
-    final_score = calculate_total_stress()
-    stress_level_result = get_stress_level(final_score)
-  
-    # Store results (optional)
-    burnout_data["final_stress_score"] = final_score
-  
-    # Return the score and the dict the results form expects
-    return stress_level_result, final_score # Returns result_dict, score_int
-  
-  
-  # =============================
-  # BURNOUT CALCULATIONS (Updated for centralized helper functions)
-  # =============================
-  
-  def get_burnout_level(score):
-    """Retrieves the level and color from the thresholds."""
-    for level, threshold in BURNOUT_THRESHOLDS.items():
-      if threshold["min"] <= score <= threshold["max"]:
-        return {"level": level, "color": threshold["color"]}
-    return {"level": "Undefined Burnout", "color": "#808080"} 
+def get_result_feedback(): 
+  """Calculates the final stress score, level, and returns the result dict for the form."""
+  final_score = calculate_total_stress()
+  stress_level_result = get_stress_level(final_score)
+
+  # FIX: Access burnout_data directly (removed 'assessment_logic.' prefix)
+  burnout_data["final_stress_score"] = final_score
+
+  return stress_level_result, final_score 
 
 
-  # ---------- PERSONAL ----------
-  def calculate_personal_burnout():
-    d = burnout_data
-  
-    # Check for presence of essential keys before calculation to avoid errors
-    if not all(k in d and d[k] is not None for k in ["daily_stress", "sleep_hours", "daily_shouting", "time_for_passion", "diet_quality", "daily_steps"]):
-      return 0, "Incomplete"
-  
-    proxy = (
-      0.35 * (d["daily_stress"] / 10) +
-      0.20 * (1 - d["sleep_hours"] / 12) +
-      0.15 * (d["daily_shouting"] / 10) +
-      0.10 * (1 - d["time_for_passion"] / 10) +
-      0.10 * (1 - d["diet_quality"] / 10) +
-      0.10 * (1 - d["daily_steps"] / 20000)
-    )
-  
-    score = round(min(100, proxy * 100), 1)
-    return score
-  
-  # ---------- STUDY ----------
-  def calculate_study_burnout():
-    d = burnout_data
-  
-    if not all(k in d and d[k] is not None for k in ["study_hours_per_day", "mental_health_rating", "social_media_hours", "attendance_percentage", "exam_score"]):
-      return 0, "Incomplete"
-  
-      # NOTE: extracurricular_participation needs mapping if included in formula
-  
-    proxy = (
-      0.35 * (d["study_hours_per_day"] / 12) +
-      0.25 * (1 - d["mental_health_rating"] / 10) +
-      0.15 * (d["social_media_hours"] / 12) +
-      0.15 * (1 - d["attendance_percentage"] / 100) +
-      0.10 * (1 - d["exam_score"] / 100)
-    )
-  
-    score = round(min(100, proxy * 100), 1)
-    return score
-  
-  # ---------- WORK ----------
-  def calculate_work_burnout():
-    d = burnout_data
-  
-    if not all(k in d and d[k] is not None for k in ["work_life_balance", "work_stress", "lost_vacation", "sufficient_income"]):
-      return 0, "Incomplete"
-  
-    proxy = (
-      0.40 * (1 - d["work_life_balance"] / 10) +
-      0.30 * (d["work_stress"] / 10) +
-      0.15 * (d["lost_vacation"] / 60) +
-      0.15 * (1 - d["sufficient_income"] / 10)
-    )
-  
-    score = round(min(100, proxy * 100), 1)
-    return score
-  
-  # ---------- COMBINED & FINAL BURNOUT SUBMISSION (New Function) ----------
-  
-  def submit_assessment():
-    """
-      Calculates the combined burnout score based on the user's role ('burnout_role').
-      This function is called by the final form in the Burnout track.
-      """
-    personal_score = calculate_personal_burnout() # Always calculated if reached
-    study_score = calculate_study_burnout()
-    work_score = calculate_work_burnout()
-  
-    scores = [personal_score]
-    role = burnout_data.get("burnout_role")
-  
-    if role == "student" or role == "both":
-      if study_score != 0:
-        scores.append(study_score)
-  
-    if role == "worker" or role == "both":
-      if work_score != 0:
-        scores.append(work_score)
-  
-      # Calculate the average of relevant scores
-    final_score = round(sum(scores) / len(scores), 1)
-  
-    # Get final result dict
-    burnout_level_result = get_burnout_level(final_score)
-  
-    burnout_data["final_burnout_score"] = final_score
-  
-    # Return the result for immediate use by the final form
-    return burnout_level_result, final_score # Returns result_dict, score_int
+# =============================
+# BURNOUT CALCULATIONS
+# =============================
+
+def get_burnout_level(score):
+  """Retrieves the level and color from the thresholds."""
+  for level, threshold in BURNOUT_THRESHOLDS.items():
+    if threshold["min"] <= score <= threshold["max"]:
+      return {"level": level, "color": threshold["color"]}
+  return {"level": "Undefined Burnout", "color": "#808080"} 
+
+
+# ---------- PERSONAL ----------
+def calculate_personal_burnout():
+  d = burnout_data
+
+  # Check for presence of essential keys before calculation
+  if not all(k in d and d[k] is not None for k in ["daily_stress", "sleep_hours", "daily_shouting", "time_for_passion", "diet_quality", "daily_steps"]):
+    return 0
+
+  proxy = (
+    0.35 * (d["daily_stress"] / 10) +
+    0.20 * (1 - d["sleep_hours"] / 12) +
+    0.15 * (d["daily_shouting"] / 10) +
+    0.10 * (1 - d["time_for_passion"] / 10) +
+    0.10 * (1 - d["diet_quality"] / 10) +
+    0.10 * (1 - d["daily_steps"] / 20000)
+  )
+
+  score = round(min(100, proxy * 100), 1)
+  return score
+
+# ---------- STUDY ----------
+def calculate_study_burnout():
+  d = burnout_data
+
+  if not all(k in d and d[k] is not None for k in ["study_hours_per_day", "mental_health_rating", "social_media_hours", "attendance_percentage", "exam_score"]):
+    return 0
+
+  proxy = (
+    0.35 * (d["study_hours_per_day"] / 12) +
+    0.25 * (1 - d["mental_health_rating"] / 10) +
+    0.15 * (d["social_media_hours"] / 12) +
+    0.15 * (1 - d["attendance_percentage"] / 100) +
+    0.10 * (1 - d["exam_score"] / 100)
+  )
+
+  score = round(min(100, proxy * 100), 1)
+  return score
+
+# ---------- WORK ----------
+def calculate_work_burnout():
+  d = burnout_data
+
+  if not all(k in d and d[k] is not None for k in ["work_life_balance", "work_stress", "lost_vacation", "sufficient_income"]):
+    return 0
+
+  proxy = (
+    0.40 * (1 - d["work_life_balance"] / 10) +
+    0.30 * (d["work_stress"] / 10) +
+    0.15 * (d["lost_vacation"] / 60) +
+    0.15 * (1 - d["sufficient_income"] / 10)
+  )
+
+  score = round(min(100, proxy * 100), 1)
+  return score
+
+# ---------- COMBINED & FINAL BURNOUT SUBMISSION ----------
+
+def submit_assessment():
+  """Calculates the combined burnout score."""
+  personal_score = calculate_personal_burnout() 
+  study_score = calculate_study_burnout()
+  work_score = calculate_work_burnout()
+
+  scores = []
+  role = burnout_data.get("burnout_role")
+
+  # Only include non-zero scores from completed sections
+  if personal_score > 0:
+    scores.append(personal_score)
+
+  if (role == "student" or role == "both") and study_score > 0:
+    scores.append(study_score)
+
+  if (role == "worker" or role == "both") and work_score > 0:
+    scores.append(work_score)
+
+  if not scores:
+    return {"level": "Incomplete Assessment", "color": "#808080"}, 0
+
+    # Calculate the average of relevant scores
+  final_score = round(sum(scores) / len(scores), 1)
+
+  # Get final result dict
+  burnout_level_result = get_burnout_level(final_score)
+    
+  burnout_data["final_burnout_score"] = final_score
+    
+  return burnout_level_result, final_score
