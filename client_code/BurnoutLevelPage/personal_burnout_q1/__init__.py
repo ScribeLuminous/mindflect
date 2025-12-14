@@ -1,4 +1,4 @@
-# --- stress_q1 ---
+# --- burnout_q1 ---
 
 from ._anvil_designer import personal_burnout_q1Template
 from anvil import *
@@ -14,7 +14,7 @@ class personal_burnout_q1(personal_burnout_q1Template):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False
-    self.q1_next_btn.enabled = False  # Disable the Next button initially
+    self.student_q1_next_btn.enabled = False  # Disable the Next button initially
     self.stress_q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
 
     # Initial check to see if the default value is valid
