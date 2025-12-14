@@ -73,7 +73,7 @@ components:
   type: Spacer
 - components:
   - data_bindings: []
-    event_bindings: {click: q2_back_btn_click}
+    event_bindings: {click: q6_back_btn_click}
     layout_properties: {col_xs: 2, row: BATUJD, width_xs: 3}
     name: q6_back_btn
     properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:arrow-left', text: back}
