@@ -1,43 +1,71 @@
+# --- student_burnout_q1.py (FINAL FIXED HANDLERS) ---
+
 from ._anvil_designer import student_burnout_q1Template
 from anvil import *
-from ... import assessment_logic
+import anvil.server
+import anvil.tables as tables
+import anvil.tables.query as q
+from anvil.tables import app_tables
+
+from .. import assessment_logic 
+
 
 class student_burnout_q1(student_burnout_q1Template):
-
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False
-    self.q1_next_btn.enabled = False
+    self.q1_next_btn.enabled = False 
 
-    # SAFE READ (prevents KeyError)
-    val = assessment_logic.burnout_data.get("study_hours_per_day")
-    self.stress_q1_ans.text = "" if val is None else str(val)
+    saved_study_hours = assessment_logic.burnout_data.get("study_hours_per_day")
+
+    if saved_study_hours is not None:
+      self.student_burnout_q1_ans.text = str(saved_study_hours)
+
+    self.live_validate()
 
   def live_validate(self):
-    ok, res = assessment_logic.validate_number(
-      self.stress_q1_ans.text, 0, 12
-    )
+    """
+        Validates input instantly (1-12, number required) and toggles error/Next button.
+        """
+    input_str = self.student_burnout_q1_ans.text
 
-    if ok:
+    # Validation: MIN 1, MAX 12 (Allows floats for hours)
+    valid, result = assessment_logic.validate_input(input_str, 1, 12, require_integer=False)
+
+    if valid:
       self.label_error.visible = False
       self.q1_next_btn.enabled = True
       return True
 
-    self.label_error.text = res
+    self.label_error.text = result
     self.label_error.visible = True
     self.q1_next_btn.enabled = False
     return False
 
-  def stress_q1_ans_change(self, **event_args):
-    self.live_validate()
+  def handle_input_and_advance(self):
+    if self.live_validate():
+      _, result = assessment_logic.validate_input(
+        self.student_burnout_q1_ans.text, 1, 12, require_integer=False
+      )
+
+      assessment_logic.burnout_data["study_hours_per_day"] = result
+
+      # Advance to the next student question
+      open_form("BurnoutLevelPage.student_burnout_q2")
+
+    # --- Event Handlers (MATCHING DESIGNER'S EXPECTED NAMES) ---
 
   def q1_next_btn_click(self, **event_args):
-    if not self.live_validate():
-      return
+    self.handle_input_and_advance()
 
-    _, value = assessment_logic.validate_number(
-      self.stress_q1_ans.text, 0, 12
-    )
+  def burnout_student_q1_ans_pressed_enter(self, **event_args):
+    self.handle_input_and_advance()
 
-    assessment_logic.burnout_data["study_hours_per_day"] = value
-    open_form("BurnoutLevelPage.student_burnout_q2")
+  def burnout_student_q1_ans_change(self, **event_args):
+    self.live_validate()
+
+  def q1_back_btn_click(self, **event_args):
+    open_form("BurnoutLevelPage") 
+
+  def home_btn_click(self, **event_args):
+    open_form("MainPage")
