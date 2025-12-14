@@ -15,14 +15,14 @@ class personal_burnout_q1(personal_burnout_q1Template):
     self.init_components(**properties)
     self.label_error.visible = False
     self.student_q1_next_btn.enabled = False  # Disable the Next button initially
-    self.stress_q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
+    burnout_personal_q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
 
     # Initial check to see if the default value is valid
     self.live_validate()
 
   def live_validate(self):
     """Validates input instantly (0-12, allows float) and toggles error/Next button."""
-    input_str = self.stress_q1_ans.text
+    input_str = burnout_personal_q1_ans.text
 
     # Validation: MIN 0, MAX 12
     # Note: We do not check for int() here, as sleep hours can be a decimal (e.g., 7.5)
