@@ -13,8 +13,8 @@ class stress_q4(stress_q4Template):
     self.label_error.visible = False
     self.q4_next_btn.enabled = False
 
-    # --- FIX: Load saved data, if it exists (Indented correctly inside __init__) ---
-    saved_value = assessment_logic.user_data['diet_quality_1_10']
+    # --- Load saved data, if it exists ---
+    saved_value = assessment_logic.user_data.get('diet_quality_1_10')
     if saved_value is not None:
       # If data is saved, display it and enable the button
       self.stress_q4_ans.text = str(saved_value)
@@ -44,11 +44,9 @@ class stress_q4(stress_q4Template):
   def handle_input_and_advance(self):
     # 1. Check validation. If invalid, stop execution.
     if not self.live_validate():
-      # live_validate already sets the error message and disables the button
       return
 
       # 2. VALIDATION PASSED: Now get the clean numeric result.
-      # THIS CODE IS ALIGNED WITH THE 'IF' STATEMENT'S SCOPE.
     _, result = assessment_logic.validate_input(
       self.stress_q4_ans.text,
       1,
@@ -61,17 +59,13 @@ class stress_q4(stress_q4Template):
     open_form("StressLevelPage.stress_q5")
 
   def stress_q4_ans_change(self, **event_args):
-    # Indented correctly
     self.live_validate()
 
   def stress_q4_ans_pressed_enter(self, **event_args):
-    # Indented correctly
     self.handle_input_and_advance()
 
   def q4_next_btn_click(self, **event_args):
-    # Indented correctly
     self.handle_input_and_advance()
 
   def q4_back_btn_click(self, **event_args):
-    # Indented correctly
     open_form("StressLevelPage.stress_q3")
