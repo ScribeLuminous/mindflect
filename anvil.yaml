@@ -31,7 +31,11 @@ db_schema:
     title: Files
   stress_logs:
     client: full
-    columns: []
+    columns:
+    - admin_ui: {order: 0, width: 200}
+      name: users
+      target: users
+      type: link_multiple
     server: full
     title: stress_logs
   users:
