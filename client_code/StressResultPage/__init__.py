@@ -114,8 +114,7 @@ class StressResultPage(StressResultPageTemplate):
     pass
 
   def save_btn_click(self, **event_args):
-    import anvil.users
-    import anvil.server
+    import anvil.data_management
     from .. import assessment_logic
   
     # 1️⃣ Calculate stress result

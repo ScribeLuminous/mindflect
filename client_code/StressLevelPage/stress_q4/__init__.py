@@ -31,6 +31,7 @@ class stress_q4(stress_q4Template):
       require_integer=True
     )
 
+    
     if valid:
       self.label_error.visible = False
       self.q4_next_btn.enabled = True
