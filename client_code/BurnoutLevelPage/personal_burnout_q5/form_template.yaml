@@ -51,9 +51,9 @@ components:
       font_size: 13
       text: "1 - 4: very poor (ultra-processed foods, fast food, and sugary drinks) \n5 - 7: average/moderate (mixed diet, some fruits/veggies, snacks, desserts, or convenience meals daily)\n8 - 10: excellent (whole, unprocessed foods, minimal sugar or saturated fat)\n"
     type: Label
-  - event_bindings: {change: burnout_personal_q5_ans_change, pressed_enter: burnout_personal_q5_ans_pressed_enter}
+  - event_bindings: {change: personal_burnout_q5_ans_change, pressed_enter: personal_burnout_q5_ans_pressed_enter}
     layout_properties: {col_xs: 6, row: JTPUOU, width_xs: 3}
-    name: q5_ans
+    name: personal_burnout_q5_ans
     properties: {font: DM Sans, font_size: 15, placeholder: 0 - 10}
     type: TextBox
   layout_properties: {grid_position: 'EJXOIG,PUCJOS'}
