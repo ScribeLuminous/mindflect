@@ -118,34 +118,54 @@ class StressResultPage(StressResultPageTemplate):
     import anvil.server
     from .. import assessment_logic
   
-    score = assessment_logic.calculate_total_stress()
-    result = assessment_logic.get_result_feedback(score)
+    # 1️⃣ Calculate stress result
+    try:
+      score = assessment_logic.calculate_total_stress()
+      result = assessment_logic.get_result_feedback(score)
+    except Exception as e:
+      Notification("Please complete all questions before saving.", style="warning").show()
+      return
   
+    # 2️⃣ If NOT logged in → prompt user
     if not anvil.users.get_user():
-      alert(
+      choice = alert(
         "You need an account to save your stress history.",
         buttons=[
           ("Login", "login"),
           ("Sign up", "signup"),
           ("Cancel", None)
-        ]
+        ],
+        dismissible=True
       )
   
-      choice = self.raise_event("x-close-alert")
       if choice == "login":
         open_form("Login")
       elif choice == "signup":
         open_form("Signup")
+  
+      # 🚨 STOP execution if not logged in
       return
   
-    success = anvil.server.call(
-      "save_daily_stress",
-      score,
-      result["level"],
-      assessment_logic.user_data
-    )
+    # 3️⃣ Save result (user IS logged in)
+    try:
+      response = anvil.server.call(
+        "save_daily_stress",
+        score,
+        result["level"],
+        dict(assessment_logic.user_data)  # defensive copy
+      )
   
-    if success:
-      Notification("Stress saved for today 💙").show()
+      if response and response.get("ok") is True:
+        Notification("Stress saved for today 💙").show()
+      else:
+        Notification(
+          "Could not save your stress result. Please try again.",
+          style="warning"
+        ).show()
   
-  
+    except Exception as e:
+      print("Save error:", e)
+      Notification(
+        "An unexpected error occurred while saving.",
+        style="danger"
+      ).show()
