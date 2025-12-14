@@ -53,7 +53,7 @@ components:
         How would you describe your overall mood recently?
         (1 - lowest  |  10 - highest)
     type: Label
-  - layout_properties: {col_xs: 2, row: FBMUSI, width_xs: 7}
+  - layout_properties: {col_xs: 1, row: UFGWYS, width_xs: 5}
     name: label_1
     properties:
       align: left
@@ -65,11 +65,11 @@ components:
         10 - Very Positive: Happy, optimistic, high energy, and resilient.
     type: Label
   - event_bindings: {change: stress_q6_ans_change, pressed_enter: stress_q6_ans_pressed_enter}
-    layout_properties: {col_xs: 4, row: TKEXUB, width_xs: 3}
+    layout_properties: {col_xs: 7, row: UFGWYS, width_xs: 3}
     name: stress_q6_ans
     properties: {placeholder: 1 - 10}
     type: TextBox
-  layout_properties: {grid_position: 'MIYGXM,YKBOGL'}
+  layout_properties: {grid_position: 'YYZCNA,PUZMMZ'}
   name: grid_panel_2
   properties: {}
   type: GridPanel

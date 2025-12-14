@@ -58,3 +58,7 @@ class stress_q3(stress_q3Template):
   def q3_back_btn_click(self, **event_args):
     open_form("StressLevelPage.stress_q2")
     pass
+
+  def home_btn_click(self, **event_args):
+    open_form('MainPage')
+    pass

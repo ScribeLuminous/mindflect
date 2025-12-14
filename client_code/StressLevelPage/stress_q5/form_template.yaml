@@ -7,7 +7,7 @@ components:
       type: Image
     - data_bindings: []
       layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: login_btn
+      name: home_btn
       properties:
         align: right
         background: '#0097b2'
@@ -19,7 +19,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: login
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}
