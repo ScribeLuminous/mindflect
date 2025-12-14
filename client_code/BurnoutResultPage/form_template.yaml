@@ -34,7 +34,7 @@ components:
     name: label_2
     properties: {align: center, bold: true, font: Young Serif, font_size: 35, text: your burnout level today}
     type: Label
-  - layout_properties: {col_xs: 2, row: XTAUCJ, width_xs: 2}
+  - layout_properties: {col_xs: 3, row: XTAUCJ, width_xs: 2}
     name: title_lbl
     properties:
       align: center
@@ -47,7 +47,7 @@ components:
       spacing_below: none
       text: ''
     type: Label
-  - layout_properties: {col_xs: 6, row: XTAUCJ, width_xs: 3}
+  - layout_properties: {col_xs: 5, row: XTAUCJ, width_xs: 3}
     name: percent_lbl
     properties: {align: center, bold: true, font: PT Serif, font_size: 70}
     type: Label

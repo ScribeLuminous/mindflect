@@ -23,6 +23,10 @@ class MainPage(MainPageTemplate):
     open_form("MainPage")
     pass
 
-  def login_btn_click(self, **event_args):
-    open_form("Account.Login")
-    pass
+  def account_btn_click(self, **event_args):
+    if anvil.users.get_user():
+      # User is already logged in
+      open_form('Account')
+    else:
+      # User needs to log in first
+      open_form('Account.Login')

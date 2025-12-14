@@ -1,4 +1,4 @@
-# --- stress_q1 ---
+# --- work_burnout_q4.py (FIXED) ---
 
 from ._anvil_designer import work_burnout_q4Template
 from anvil import *
@@ -8,77 +8,76 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ... import assessment_logic
-
+# Adjust import based on your folder structure
+from .. import assessment_logic 
 
 class work_burnout_q4(work_burnout_q4Template):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False
-    self.q1_next_btn.enabled = False  # Disable the Next button initially
-    self.stress_q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
 
-    # Initial check to see if the default value is valid
+    # 1. Disable Next button by default
+    self.q4_next_btn.enabled = False 
+
+    # 2. Load Saved Data for THIS question (Sufficient Income)
+    # Note: Accessing burnout_data, not user_data
+    saved = assessment_logic.burnout_data.get("sufficient_income")
+
+    if saved is not None:
+      self.work_burnout_q4_ans.text = str(saved)
+
+    # 3. Trigger validation immediately
     self.live_validate()
 
   def live_validate(self):
-    """Validates input instantly (0-12, allows float) and toggles error/Next button."""
-    input_str = self.stress_q1_ans.text
+    """
+    Validates input instantly (0-10, integer required).
+    """
+    input_str = self.work_burnout_q4_ans.text
 
-    # Validation: MIN 0, MAX 12
-    # Note: We do not check for int() here, as sleep hours can be a decimal (e.g., 7.5)
-    valid, result = assessment_logic.validate_input(input_str, 0, 12)
+    # Validation: MIN 0, MAX 10 (Standard rating scale)
+    valid, result = assessment_logic.validate_input(input_str, 0, 10, require_integer=True)
 
     if valid:
       self.label_error.visible = False
-      self.q1_next_btn.enabled = True  # Enable the button
+      self.q4_next_btn.enabled = True
       return True
 
-      # If we reach here, validation failed.
-    self.label_error.text = result  # error message from validate_input
+    # Invalid
+    self.label_error.text = result
     self.label_error.visible = True
-    self.q1_next_btn.enabled = False  # Disable the button
+    self.q4_next_btn.enabled = False
     return False
 
   def handle_input_and_advance(self):
-    # We rely on live_validate to check the final state before advancing
+    """Saves data and transitions to the Personal section."""
     if self.live_validate():
-      # Data is valid, save it and advance
-      # Re-running validation just to get the final numeric result (result)
-      _, result = assessment_logic.validate_input(self.stress_q1_ans.text, 0, 12)
+      # Get the clean integer value
+      _, result = assessment_logic.validate_input(
+        self.work_burnout_q4_ans.text, 0, 10, require_integer=True
+      )
 
-      assessment_logic.user_data["sleep_hours"] = result
-      open_form("StressLevelPage.stress_q2")
-      # No 'else' needed, as live_validate handles error display
+      # 1. Save to global logic (Key: 'sufficient_income')
+      assessment_logic.burnout_data["sufficient_income"] = result
 
-  def q1_next_btn_click(self, **event_args):
-    self.handle_input_and_advance()
+      # 2. TRANSITION: Work Section Complete -> Start Personal Section
+      open_form("BurnoutLevelPage.personal_burnout_q1")
 
-  def burnout_work_q4_ans_pressed_enter(self, **event_args):
-    self.handle_input_and_advance()
-
-    # --- THIS IS THE FUNCTION YOU ASKED FOR ---
-
-  def burnout_work_q4_ans_change(self, **event_args):
-    """This method is called when the text in this text box is edited"""
-    self.live_validate()
-
-  def home_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
-
-  def q4_back_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
+  # --- Event Handlers ---
 
   def q4_next_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
+    self.handle_input_and_advance()
 
-  def q4_ans_change(self, **event_args):
-    """This method is called when the text in this text box is edited"""
-    pass
+  def work_burnout_q4_ans_pressed_enter(self, **event_args):
+    self.handle_input_and_advance()
 
-  def q4_ans_pressed_enter(self, **event_args):
-    """This method is called when the user presses Enter in this text box"""
-    pass
+  def work_burnout_q4_ans_change(self, **event_args):
+    """Called when text changes: runs live validation"""
+    self.live_validate()
+
+  def q4_back_btn_click(self, **event_args):
+    """Go back to Work Q3"""
+    open_form("BurnoutLevelPage.work_burnout_q3") 
+
+  def home_btn_click(self, **event_args):
+    open_form("MainPage")

@@ -31,3 +31,7 @@ class Signup(SignupTemplate):
 
   def login_link_click(self, **event_args):
     open_form('Login')
+
+  def home_btn_click(self, **event_args):
+    open_form('MainPage')
+    pass

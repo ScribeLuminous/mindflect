@@ -1,8 +1,7 @@
-# --- student_burnout_q6.py ---
+# --- student_burnout_q6.py (FIXED FOR 'BOTH' LOGIC) ---
 
 from ._anvil_designer import student_burnout_q6Template
 from anvil import *
-import anvil.users
 import anvil.server
 import anvil.tables as tables
 import anvil.tables.query as q
@@ -49,16 +48,24 @@ class student_burnout_q6(student_burnout_q6Template):
       self.label_error.visible = True
       return
 
-      # Validation passed
+    # Validation passed
     self.label_error.visible = False
 
     # 1. Save the selection
     assessment_logic.burnout_data["extracurricular_participation"] = selection
 
-    # 2. Student assessment is COMPLETE. Advance to personal burnout questions.
-    open_form("BurnoutLevelPage.personal_burnout_q1") 
+    # 2. CHECK ROLE: Where to go next?
+    # Retrieve the role saved on the first page
+    role = assessment_logic.user_data.get('current_situation')
 
-    # --- Event Handlers ---
+    if role == 'both':
+      # If they are BOTH, they must do Work questions now
+      open_form("BurnoutLevelPage.work_burnout_q1")
+    else:
+      # If they are just Student, skip to Personal questions
+      open_form("BurnoutLevelPage.personal_burnout_q1") 
+
+  # --- Event Handlers ---
 
   def q6_next_btn_click(self, **event_args):
     self.handle_input_and_advance()

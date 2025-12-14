@@ -7,7 +7,7 @@ components:
       type: Image
     - data_bindings: []
       event_bindings: {click: home_btn_click}
-      layout_properties: {col_xs: 8, row: BFFRBJ, width_xs: 2}
+      layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
       name: home_btn
       properties:
         align: right
@@ -20,24 +20,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: main page
-      type: Button
-    - data_bindings: []
-      event_bindings: {click: login_btn_click}
-      layout_properties: {col_xs: 10, row: BFFRBJ, width_xs: 2}
-      name: login_btn
-      properties:
-        align: right
-        background: '#0097b2'
-        bold: false
-        border: '#41b8d5'
-        font: DM Sans
-        foreground: '#efe9ce'
-        icon: fa:home
-        spacing:
-          padding: [null, 28, 5, null]
-        spacing_above: medium
-        text: account
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}
@@ -82,13 +65,13 @@ components:
   name: stress_con
   properties: {background: '#e0fe9c', bold: true, font: DM Sans, font_size: 20, foreground: '#523d72', icon: 'fa:chevron-right', text: continue}
   type: Button
-- layout_properties: {grid_position: 'UARDQF,ORAWJE'}
+- layout_properties: {grid_position: 'IVEMYX,PRAQIV'}
   name: spacer_1_copy
   properties: {height: 32}
   type: Spacer
-- layout_properties: {full_width_row: true, grid_position: 'YBWCOY,RWANXI'}
-  name: flow_panel_1
-  properties: {background: '#41b8d5'}
-  type: FlowPanel
+- layout_properties: {full_width_row: true, grid_position: 'NGPVZG,CDFOBG'}
+  name: bottom_panel
+  properties: {background: '#0097b2', spacing_above: large}
+  type: LinearPanel
 container: {type: ColumnPanel}
 is_package: true

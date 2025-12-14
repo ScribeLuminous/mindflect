@@ -95,7 +95,6 @@ def validate_input(value_str, min_val, max_val, require_integer=False):
 # =============================
 
 def calculate_total_stress():
-  # FIX: Access user_data directly (removed 'assessment_logic.' prefix)
 
   score_sleep = max(0, min(100, (8 - (user_data["sleep_hours"] or 8)) * 25))
   score_exercise = max(0, min(100, (60 - (user_data["daily_exercise_mins"] or 60)) * 1.6))
@@ -204,33 +203,35 @@ def calculate_work_burnout():
 # ---------- COMBINED & FINAL BURNOUT SUBMISSION ----------
 
 def submit_assessment():
-  """Calculates the combined burnout score."""
-  personal_score = calculate_personal_burnout() 
-  study_score = calculate_study_burnout()
-  work_score = calculate_work_burnout()
+  """Calculates burnout using the ML models on the server."""
 
-  scores = []
   role = burnout_data.get("burnout_role")
 
-  # Only include non-zero scores from completed sections
-  if personal_score > 0:
-    scores.append(personal_score)
+  # 1. Call the appropriate ML model based on role
+  # Note: We pass the whole 'burnout_data' dict, and the server picks what it needs
+  if role == "student":
+    result = anvil.server.call('predict_burnout_study', burnout_data)
+    final_level = result['level']
+    # Map text level to a score for the gauge (Approximate)
+    final_score = 30 if "Low" in final_level else (60 if "Moderate" in final_level else 85)
 
-  if (role == "student" or role == "both") and study_score > 0:
-    scores.append(study_score)
+  elif role == "worker":
+    result = anvil.server.call('predict_burnout_work', burnout_data)
+    final_level = result['level']
+    final_score = 30 if "Low" in final_level else (60 if "Moderate" in final_level else 85)
 
-  if (role == "worker" or role == "both") and work_score > 0:
-    scores.append(work_score)
+  else: 
+    # Fallback to Personal or Average if 'Both' (or define logic for 'Both')
+    result = anvil.server.call('predict_burnout_personal', burnout_data)
+    final_level = result['level']
+    final_score = 30 if "Low" in final_level else (60 if "Moderate" in final_level else 85)
 
-  if not scores:
-    return {"level": "Incomplete Assessment", "color": "#808080"}, 0
+    # Format for the UI
+  burnout_level_result = {
+    "level": final_level,
+    "color": "#4CAF50" if "Low" in final_level else ("#FFC107" if "Moderate" in final_level else "#F44336")
+  }
 
-    # Calculate the average of relevant scores
-  final_score = round(sum(scores) / len(scores), 1)
-
-  # Get final result dict
-  burnout_level_result = get_burnout_level(final_score)
-    
   burnout_data["final_burnout_score"] = final_score
-    
+
   return burnout_level_result, final_score

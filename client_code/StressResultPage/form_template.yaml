@@ -20,7 +20,7 @@ components:
         spacing:
           padding: [null, 28, 5, null]
         spacing_above: medium
-        text: home page
+        text: home
       type: Button
     name: grid_panel_1
     properties: {}
@@ -30,11 +30,15 @@ components:
   properties: {}
   type: LinearPanel
 - components:
+  - layout_properties: {col_xs: 2, row: KPHCSK, width_xs: 8}
+    name: label_2
+    properties: {align: center, bold: true, font: Young Serif, font_size: 35, text: your stress level today}
+    type: Label
   - layout_properties: {col_xs: 2, row: XTAUCJ, width_xs: 8}
     name: gauge_canvas
     properties: {height: 69}
     type: Canvas
-  - layout_properties: {col_xs: 2, row: OSJLVJ, width_xs: 3}
+  - layout_properties: {col_xs: 3, row: OSJLVJ, width_xs: 3}
     name: title_lbl
     properties:
       align: center
@@ -47,7 +51,7 @@ components:
       spacing_below: none
       text: ''
     type: Label
-  - layout_properties: {col_xs: 5, row: OSJLVJ, width_xs: 3}
+  - layout_properties: {col_xs: 6, row: OSJLVJ, width_xs: 3}
     name: percent_lbl
     properties: {align: center, bold: true, font: PT Serif, font_size: 50}
     type: Label
