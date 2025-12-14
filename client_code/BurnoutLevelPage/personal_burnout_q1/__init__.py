@@ -1,4 +1,4 @@
-# --- personal_burnout_q1.py (FINAL CORRECTED CODE) ---
+# --- personal_burnout_q1.py ---
 
 from ._anvil_designer import personal_burnout_q1Template
 from anvil import *
@@ -7,39 +7,38 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ... import assessment_logic
+from .. import assessment_logic 
+
 
 class personal_burnout_q1(personal_burnout_q1Template):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False
-
-    # Assuming the designer name for the button is q1_next_btn
     self.q1_next_btn.enabled = False 
 
-    # FIX 1 & 2: Use self.burnout_personal_q1_ans.text to access the component
-    saved_sleep_hours = assessment_logic.user_data.get("sleep_hours")
+    # KEY: daily_stress (Scale 0-10, integer)
+    saved_rating = assessment_logic.burnout_data.get("daily_stress")
 
-    # Initialize text box with saved data if it exists
-    if saved_sleep_hours is not None:
-      self.burnout_personal_q1_ans.text = str(saved_sleep_hours)
+    if saved_rating is not None:
+      self.personal_burnout_q1_ans.text = str(saved_rating)
 
     self.live_validate()
 
   def live_validate(self):
-    """Validates input instantly (0-12, allows float) and toggles error/Next button."""
-    # FIX 2: Use self.burnout_personal_q1_ans.text
-    input_str = self.burnout_personal_q1_ans.text
+    """
+        Validates input instantly (0-10, integer required) for daily stress rating.
+        """
+    input_str = self.personal_burnout_q1_ans.text
 
-    # Validation: MIN 0, MAX 12 (Allows floats for sleep hours)
-    valid, result = assessment_logic.validate_input(input_str, 0, 12)
+    # Validation: MIN 0, MAX 10 (REQUIRES INTEGER for a rating scale)
+    valid, result = assessment_logic.validate_input(input_str, 0, 10, require_integer=True)
 
     if valid:
       self.label_error.visible = False
       self.q1_next_btn.enabled = True
       return True
 
-    # If we reach here, validation failed.
+      # Validation failed.
     self.label_error.text = result
     self.label_error.visible = True
     self.q1_next_btn.enabled = False
@@ -47,25 +46,32 @@ class personal_burnout_q1(personal_burnout_q1Template):
 
   def handle_input_and_advance(self):
     if self.live_validate():
-      # Re-running validation just to get the final numeric result (result)
-      # FIX 4: Use max 12 for consistency
-      _, result = assessment_logic.validate_input(self.burnout_personal_q1_ans.text, 0, 12)
+      # Re-run validation to get the final numeric result (result)
+      _, result = assessment_logic.validate_input(
+        self.personal_burnout_q1_ans.text, 0, 10, require_integer=True
+      )
 
-      assessment_logic.user_data["sleep_hours"] = result
+      # SAVE: Save the result to the correct dictionary and key
+      assessment_logic.burnout_data["daily_stress"] = result
 
-      # FIX 3: Advance to the NEXT personal burnout question
+      # ADVANCE: Next personal question is personal_burnout_q2
       open_form("BurnoutLevelPage.personal_burnout_q2")
+
+    # --- Event Handlers ---
 
   def q1_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_personal_q1_ans_pressed_enter(self, **event_args):
+  def personal_burnout_q1_ans_pressed_enter(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_personal_q1_ans_change(self, **event_args):
-    """This method is called when the text in this text box is edited"""
+  def personal_burnout_q1_ans_change(self, **event_args):
+    """Called when the text in the text box is edited (live validation)"""
     self.live_validate()
+
+  def q1_back_btn_click(self, **event_args):
+    """Go back to the last student question (Q6)"""
+    open_form("BurnoutLevelPage.student_burnout_q6") 
 
   def home_btn_click(self, **event_args):
     open_form("MainPage")
-    pass

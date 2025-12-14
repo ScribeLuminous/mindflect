@@ -53,9 +53,9 @@ components:
       text: |
         (input from 0 - 12 hours)
     type: Label
-  - event_bindings: {change: burnout_personal_q2_ans_change, pressed_enter: burnout_personal_q2_ans_pressed_enter}
+  - event_bindings: {change: personal_burnout_q2_ans_change, pressed_enter: personal_burnout_q2_ans_pressed_enter}
     layout_properties: {col_xs: 6, row: GXAIEE, width_xs: 3}
-    name: q2_ans
+    name: personal_burnout_q2_ans
     properties: {font: DM Sans, font_size: 15, placeholder: 0 - 12}
     type: TextBox
   layout_properties: {grid_position: 'EJXOIG,PUCJOS'}

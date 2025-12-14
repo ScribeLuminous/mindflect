@@ -1,4 +1,4 @@
-# --- stress_q1 ---
+# --- student_burnout_q6.py ---
 
 from ._anvil_designer import student_burnout_q6Template
 from anvil import *
@@ -7,61 +7,74 @@ import anvil.tables as tables
 import anvil.tables.query as q
 from anvil.tables import app_tables
 
-from ... import assessment_logic
+from .. import assessment_logic 
 
 
 class student_burnout_q6(student_burnout_q6Template):
   def __init__(self, **properties):
     self.init_components(**properties)
     self.label_error.visible = False
-    self.q1_next_btn.enabled = False  # Disable the Next button initially
-    self.stress_q1_ans.text = str(assessment_logic.user_data["sleep_hours"])
 
-    # Initial check to see if the default value is valid
-    self.live_validate()
+    # --- Radio Button Setup ---
+    group_name = 'extracurricular'
+    self.q6_yes.group_name = group_name
+    self.q6_no.group_name = group_name
 
-  def live_validate(self):
-    """Validates input instantly (0-12, allows float) and toggles error/Next button."""
-    input_str = self.stress_q1_ans.text
+    # Assign values for storage
+    self.q6_yes.value = 'yes'
+    self.q6_no.value = 'no'
 
-    # Validation: MIN 0, MAX 12
-    # Note: We do not check for int() here, as sleep hours can be a decimal (e.g., 7.5)
-    valid, result = assessment_logic.validate_input(input_str, 0, 12)
+    # Load saved data
+    saved_selection = assessment_logic.burnout_data.get("extracurricular_participation")
+    if saved_selection == 'yes':
+      self.q6_yes.selected = True
+    elif saved_selection == 'no':
+      self.q6_no.selected = True
 
-    if valid:
-      self.label_error.visible = False
-      self.q1_next_btn.enabled = True  # Enable the button
-      return True
-
-      # If we reach here, validation failed.
-    self.label_error.text = result  # error message from validate_input
-    self.label_error.visible = True
-    self.q1_next_btn.enabled = False  # Disable the button
-    return False
+  def get_selected_value(self):
+    """Helper to find the value of the selected radio button."""
+    if self.q6_yes.selected:
+      return self.q6_yes.value
+    if self.q6_no.selected:
+      return self.q6_no.value
+    return None
 
   def handle_input_and_advance(self):
-    # We rely on live_validate to check the final state before advancing
-    if self.live_validate():
-      # Data is valid, save it and advance
-      # Re-running validation just to get the final numeric result (result)
-      _, result = assessment_logic.validate_input(self.stress_q1_ans.text, 0, 12)
+    selection = self.get_selected_value()
 
-      assessment_logic.user_data["sleep_hours"] = result
-      open_form("StressLevelPage.stress_q2")
-      # No 'else' needed, as live_validate handles error display
+    if selection is None:
+      # Validation failed: No selection made
+      self.label_error.text = "Please select an option to continue."
+      self.label_error.visible = True
+      return
 
-  def q1_next_btn_click(self, **event_args):
+      # Validation passed
+    self.label_error.visible = False
+
+    # 1. Save the selection
+    assessment_logic.burnout_data["extracurricular_participation"] = selection
+
+    # 2. Student assessment is COMPLETE. Advance to personal burnout questions.
+    open_form("BurnoutLevelPage.personal_burnout_q1") 
+
+    # --- Event Handlers ---
+
+  def q6_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_student_q5_ans_pressed_enter(self, **event_args):
-    self.handle_input_and_advance()
+  def radio_selection_clicked(self, **event_args):
+    """Shared handler for both radio buttons to clear the error message."""
+    self.label_error.visible = False
 
-    # --- THIS IS THE FUNCTION YOU ASKED FOR ---
+  def q6_yes_clicked(self, **event_args):
+    self.radio_selection_clicked()
 
-  def burnout_student_q5_ans_change(self, **event_args):
-    """This method is called when the text in this text box is edited"""
-    self.live_validate()
+  def q6_no_clicked(self, **event_args):
+    self.radio_selection_clicked()
+
+  def q6_back_btn_click(self, **event_args):
+    """Go back to the previous question (Q5)"""
+    open_form("BurnoutLevelPage.student_burnout_q5") 
 
   def home_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
+    open_form("MainPage")
