@@ -114,42 +114,38 @@ class StressResultPage(StressResultPageTemplate):
     pass
 
   def save_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
-
-def save_btn_click(self, **event_args):
-  import anvil.users
-  import anvil.server
-  from .. import assessment_logic
-
-  score = assessment_logic.calculate_total_stress()
-  result = assessment_logic.get_result_feedback(score)
-
-  if not anvil.users.get_user():
-    alert(
-      "You need an account to save your stress history.",
-      buttons=[
-        ("Login", "login"),
-        ("Sign up", "signup"),
-        ("Cancel", None)
-      ]
+    import anvil.users
+    import anvil.server
+    from .. import assessment_logic
+  
+    score = assessment_logic.calculate_total_stress()
+    result = assessment_logic.get_result_feedback(score)
+  
+    if not anvil.users.get_user():
+      alert(
+        "You need an account to save your stress history.",
+        buttons=[
+          ("Login", "login"),
+          ("Sign up", "signup"),
+          ("Cancel", None)
+        ]
+      )
+  
+      choice = self.raise_event("x-close-alert")
+      if choice == "login":
+        open_form("Login")
+      elif choice == "signup":
+        open_form("Signup")
+      return
+  
+    success = anvil.server.call(
+      "save_daily_stress",
+      score,
+      result["level"],
+      assessment_logic.user_data
     )
-
-    choice = self.raise_event("x-close-alert")
-    if choice == "login":
-      open_form("Login")
-    elif choice == "signup":
-      open_form("Signup")
-    return
-
-  success = anvil.server.call(
-    "save_daily_stress",
-    score,
-    result["level"],
-    assessment_logic.user_data
-  )
-
-  if success:
-    Notification("Stress saved for today 💙").show()
-
- 
+  
+    if success:
+      Notification("Stress saved for today 💙").show()
+  
+  
