@@ -52,7 +52,7 @@ components:
     properties: {bold: true, font: Young Serif, font_size: 25, text: 'What best describes your current situation?'}
     type: Label
   - data_bindings: []
-    event_bindings: {clicked: radio_btn_clicked}
+    event_bindings: {clicked: radio_student_clicked}
     layout_properties: {col_xs: 3, row: WWFJWV, width_xs: 5}
     name: radio_student
     properties: {font: DM Sans, font_size: 18, text: I'm a student}

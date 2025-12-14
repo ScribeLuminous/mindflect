@@ -59,3 +59,7 @@ class BurnoutLevelPage(BurnoutLevelPageTemplate):
   def home_btn_click(self, **event_args):
     open_form("MainPage")
     pass
+
+  def radio_student_clicked(self, **event_args):
+    """This method is called when this radio button is selected"""
+    pass
