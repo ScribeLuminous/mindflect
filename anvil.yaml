@@ -13,6 +13,10 @@ db_schema:
     - admin_ui: {width: 200}
       name: total_score
       type: number
+    - admin_ui: {order: 3, width: 200}
+      name: stress_logs
+      target: stress_logs
+      type: link_multiple
     server: full
     title: burnout_logs
   files:
@@ -35,6 +39,16 @@ db_schema:
     - admin_ui: {order: 0, width: 200}
       name: users
       target: users
+      type: link_multiple
+    - admin_ui: {order: 1, width: 200}
+      name: date
+      type: datetime
+    - admin_ui: {order: 2, width: 200}
+      name: total_score
+      type: number
+    - admin_ui: {order: 3, width: 200}
+      name: burnout_logs
+      target: burnout_logs
       type: link_multiple
     server: full
     title: stress_logs
