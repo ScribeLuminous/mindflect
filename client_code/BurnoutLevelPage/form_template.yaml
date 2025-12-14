@@ -52,25 +52,25 @@ components:
     properties: {bold: true, font: Young Serif, font_size: 25, text: 'What best describes your current situation?'}
     type: Label
   - data_bindings: []
-    event_bindings: {clicked: radio_student_clicked}
+    event_bindings: {}
     layout_properties: {col_xs: 3, row: WWFJWV, width_xs: 5}
     name: radio_student
     properties: {font: DM Sans, font_size: 18, text: I'm a student}
     type: RadioButton
   - data_bindings: []
-    event_bindings: {clicked: radio_working_clicked}
+    event_bindings: {}
     layout_properties: {col_xs: 3, row: NSJNEB, width_xs: 6}
     name: radio_working
     properties: {font: DM Sans, font_size: 18, text: I’m working (employed / freelancer / business)}
     type: RadioButton
   - data_bindings: []
-    event_bindings: {clicked: radio_both_clicked}
+    event_bindings: {}
     layout_properties: {col_xs: 3, row: TFTLSN, width_xs: 6}
     name: radio_both
     properties: {font: DM Sans, font_size: 18, text: I am both}
     type: RadioButton
   - data_bindings: []
-    event_bindings: {clicked: radio_none_clicked}
+    event_bindings: {}
     layout_properties: {col_xs: 3, row: SSWYPV, width_xs: 5}
     name: radio_none
     properties: {font: DM Sans, font_size: 18, text: 'Not working, not student'}

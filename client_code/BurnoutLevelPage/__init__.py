@@ -28,51 +28,55 @@ class BurnoutLevelPage(BurnoutLevelPageTemplate):
     self.radio_both.value = 'both'
     self.radio_none.value = 'none'
 
-  def burnout_con_click(self, **event_args):
+def burnout_con_click(self, **event_args):
+  # -----------------------------------------------------------------
+  # 1. Manual loop to find the selected button
+  # -----------------------------------------------------------------
+  selection = None
+
+  radio_buttons = [
+    self.radio_student,
+    self.radio_working,
+    self.radio_both,
+    self.radio_none
+  ]
+
+  for radio in radio_buttons:
+    if radio.selected: 
+      selection = radio.value
+      break 
+
     # -----------------------------------------------------------------
-    # FIX: The fail-safe way to get the selection.
-    # We iterate and check the '.selected' property (not .checked).
+    # 2. Validation
     # -----------------------------------------------------------------
-    selection = None
+  if selection is None:
+    self.label_error.text = "Please select your current situation to continue."
+    self.label_error.visible = True
+    return
 
-    # List all your radio button components here
-    radio_buttons = [
-      self.radio_student,
-      self.radio_working,
-      self.radio_both,
-      self.radio_none
-    ]
+  self.label_error.visible = False
 
-    # Loop through them to find which one is turned on
-    for radio in radio_buttons:
-      if radio.selected:  # <--- This is the correct property name for RadioButtons
-        selection = radio.value
-        break 
+  # -----------------------------------------------------------------
+  # 3. Save Data
+  # -----------------------------------------------------------------
+  assessment_logic.user_data['current_situation'] = selection
 
-    if selection is None:
-      # Validation failed: No selection made
-      self.label_error.text = "Please select your current situation to continue."
-      self.label_error.visible = True
-      return
+  # -----------------------------------------------------------------
+  # 4. Navigation (FIXED VALUES HERE)
+  # -----------------------------------------------------------------
+  # We compare against 'student', 'working', etc. (the values you set in __init__)
+  if selection == 'student':
+    open_form("BurnoutLevelPage.student_burnout_q1")
 
-      # Validation passed
-    self.label_error.visible = False
+  elif selection == 'working':
+    open_form("BurnoutLevelPage.work_burnout_q1")
 
-    # 1. Save the selection
-    assessment_logic.user_data['current_situation'] = selection
+  elif selection == 'both':
+    open_form("BurnoutLevelPage.student_burnout_q1") 
 
-    # 2. Advance to the next form based on the selection
-    if selection == 'student':
-      open_form("BurnoutLevelPage.student_burnout_q1")
-
-    elif selection == 'working':
-      open_form("BurnoutLevelPage.work_burnout_q1")
-
-    elif selection == 'both':
-      open_form("BurnoutLevelPage.student_burnout_q1") 
-
-    elif selection == 'none':
-      open_form("BurnoutLevelPage.personal_burnout_q1") 
+  elif selection == 'none':
+    open_form("BurnoutLevelPage.personal_burnout_q1")
+ 
 
   def radio_selection_clicked(self, **event_args):
     """
