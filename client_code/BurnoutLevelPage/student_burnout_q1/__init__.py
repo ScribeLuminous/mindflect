@@ -1,4 +1,4 @@
-# --- student_burnout_q1.py (CLEAN SYNTAX) ---
+# --- student_burnout_q1.py (FINAL, CLEAN HANDLERS) ---
 
 from ._anvil_designer import student_burnout_q1Template
 from anvil import *
@@ -53,15 +53,15 @@ class student_burnout_q1(student_burnout_q1Template):
       # Advance to the next student question
       open_form("BurnoutLevelPage.student_burnout_q2")
 
-    # --- Event Handlers (MATCHING DESIGNER'S EXPECTED NAMES) ---
+    # --- Event Handlers (Using the confirmed, standard names) ---
 
   def q1_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_student_q1_ans_pressed_enter(self, **event_args):
+  def student_burnout_q1_ans_pressed_enter(self, **event_args):
     self.handle_input_and_advance()
 
-  def burnout_student_q1_ans_change(self, **event_args):
+  def student_burnout_q1_ans_change(self, **event_args):
     self.live_validate()
 
   def q1_back_btn_click(self, **event_args):

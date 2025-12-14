@@ -1,4 +1,4 @@
-# --- student_burnout_q3.py ---
+# --- student_burnout_q3.py (Regenerated) ---
 
 from ._anvil_designer import student_burnout_q3Template
 from anvil import *
@@ -16,7 +16,7 @@ class student_burnout_q3(student_burnout_q3Template):
     self.label_error.visible = False
     self.q3_next_btn.enabled = False 
 
-    # KEY: social_media_hours (Max 12 hours/day)
+    # KEY: social_media_hours (Max 12 hours/day, allows float)
     saved_hours = assessment_logic.burnout_data.get("social_media_hours")
 
     if saved_hours is not None:
@@ -58,7 +58,7 @@ class student_burnout_q3(student_burnout_q3Template):
       # ADVANCE: Next question is student_burnout_q4
       open_form("BurnoutLevelPage.student_burnout_q4")
 
-    # --- Event Handlers ---
+    # --- Event Handlers (Using standard names) ---
 
   def q3_next_btn_click(self, **event_args):
     self.handle_input_and_advance()
