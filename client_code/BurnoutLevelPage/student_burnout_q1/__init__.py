@@ -1,4 +1,4 @@
-# --- stress_q1 ---
+# --- burnout_q1 ---
 
 from ._anvil_designer import student_burnout_q1Template
 from anvil import *

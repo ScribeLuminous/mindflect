@@ -44,7 +44,7 @@ class personal_burnout_q1(personal_burnout_q1Template):
     if self.live_validate():
       # Data is valid, save it and advance
       # Re-running validation just to get the final numeric result (result)
-      _, result = assessment_logic.validate_input(self.stress_q1_ans.text, 0, 12)
+      _, result = assessment_logic.validate_input(burnout_personal_q1_ans.text, 0, 10)
 
       assessment_logic.user_data["sleep_hours"] = result
       open_form("StressLevelPage.stress_q2")
