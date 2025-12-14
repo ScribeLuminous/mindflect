@@ -1,4 +1,4 @@
-# --- student_burnout_q1.py (FINAL FIXED HANDLERS) ---
+# --- student_burnout_q1.py (CLEAN SYNTAX) ---
 
 from ._anvil_designer import student_burnout_q1Template
 from anvil import *
