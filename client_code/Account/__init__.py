@@ -15,15 +15,23 @@ class Account(AccountTemplate):
   def __init__(self, **properties):
     self.init_components(**properties)
 
+    # 1. Security Check
     if not anvil.users.get_user():
       open_form('Account.Login') 
       return
 
+    # 2. Load Content
     self.load_history_graphs()
     self.load_dashboard_content()
 
   def load_dashboard_content(self):
-    data = anvil.server.call('get_user_profile_data')
+    """Fetches user profile data and updates labels."""
+    try:
+      data = anvil.server.call('get_user_profile_data')
+    except Exception as e:
+      print(f"Server Error: {e}")
+      return
+
     if not data: 
       return
 
@@ -34,7 +42,7 @@ class Account(AccountTemplate):
     # STRESS SECTION
     # =================================================
 
-    # Stress Encouragement
+    # Random Stress Encouragement
     stress_quotes = [
       "Believe you can and you're halfway there.",
       "One small positive thought can change your whole day.",
@@ -45,16 +53,18 @@ class Account(AccountTemplate):
     self.encouragement_lbl.text = f"✨ {random.choice(stress_quotes)}"
 
     # Stress Recommendations
-    s_level = data['latest_stress_level']
+    # FIX: Use .get() to avoid crashing if key is missing
+    s_level = data.get('latest_stress_level') 
     s_text = ""
 
-    if "Low" in s_level:
+    # FIX: Check "if s_level" first to ensure it is not None
+    if s_level and "Low" in s_level:
       s_text = "• Try to read a book\n• Take a short walk\n• Spend time with a pet\n• Listen to calming music"
       self.stress_recs.foreground = "#4CAF50"
-    elif "Moderate" in s_level:
+    elif s_level and "Moderate" in s_level:
       s_text = "• Write down your thoughts in a diary\n• Get a change of scenery\n• Take a walk, yoga or dance"
       self.stress_recs.foreground = "#FF9800"
-    elif "High" in s_level:
+    elif s_level and "High" in s_level:
       s_text = "• Consider talking with a professional\n• Practice intense physical activity\n• Reach out to a trusted friend"
       self.stress_recs.foreground = "#F44336"
     else:
@@ -64,44 +74,43 @@ class Account(AccountTemplate):
     self.stress_recs.text = s_text
 
     # =================================================
-    # BURNOUT SECTION (NEW!)
+    # BURNOUT SECTION
     # =================================================
 
-    # Burnout Encouragement
+    # Random Burnout Encouragement
     burnout_quotes = [
       "Rest is not idleness, it is the key to better work.",
-      "You can't pour from an empty cup. Take care of yourself first.",
+      "You can't pour from an empty cup.",
       "It's okay to take a break. The world will wait.",
-      "Burnout is nature's way of telling you, you've been going through the motions your soul has departed.",
+      "Burnout is nature's way of telling you, you've been going through the motions.",
       "Self-care is how you take your power back."
     ]
     self.burn_encouragement_lbl.text = f"🌿 {random.choice(burnout_quotes)}"
 
     # Burnout Recommendations
-    b_level = data['latest_burnout_level']
+    b_level = data.get('latest_burnout_level')
     b_text = ""
 
-    if "Low" in b_level:
+    # FIX: Check "if b_level" first
+    if b_level and "Low" in b_level:
       b_text = (
         "• Prioritize your self-care.\n"
         "• Set small boundaries at your responsibilities.\n"
         "• Take short breaks.\n"
-        "• Learn to say 'no' to non-essential tasks.\n"
-        "• Establish a daily routine with activities you enjoy."
+        "• Learn to say 'no' to non-essential tasks."
       )
       self.burnout_recs.foreground = "#4CAF50" # Green
 
-    elif "Moderate" in b_level:
+    elif b_level and "Moderate" in b_level:
       b_text = (
         "• Schedule downtime and stick to it.\n"
         "• Delegate tasks or ask for help.\n"
         "• Do meditation.\n"
-        "• Limit using social media.\n"
-        "• Reach out to friends or family for emotional support."
+        "• Limit social media use."
       )
       self.burnout_recs.foreground = "#FF9800" # Orange
 
-    elif "High" in b_level:
+    elif b_level and "High" in b_level:
       b_text = (
         "• Seek support from a professional.\n"
         "• Focus on rest and recovery.\n"
@@ -116,9 +125,12 @@ class Account(AccountTemplate):
     self.burnout_recs.text = b_text
 
 
-  # --- GRAPH LOGIC (UNCHANGED) ---
+  # --- GRAPH LOGIC ---
   def load_history_graphs(self):
-    stress_data, burnout_data = anvil.server.call('get_user_history')
+    try:
+      stress_data, burnout_data = anvil.server.call('get_user_history')
+    except Exception:
+      return 
 
     # Stress Plot
     if stress_data:
