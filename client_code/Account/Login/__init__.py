@@ -39,6 +39,31 @@ class Login(LoginTemplate):
     open_form('Account.Signup')
     pass
 
-  def forgot_pass_btn_click(self, **event_args):
+  def send_reset_btn_click(self, **event_args):
     """This method is called when the button is clicked"""
     pass
+
+  def forgot_pass_btn_click(self, **event_args):
+    """Unhides the reset email box and button."""
+    self.reset_email_box.visible = True
+    self.send_reset_btn.visible = True
+    self.reset_email_box.focus() 
+
+  def send_reset_btn_click(self, **event_args):
+    """Actually sends the email when the user clicks 'Send Link'"""
+    email = self.reset_email_box.text.strip()
+
+    if email:
+      try:
+        anvil.users.send_password_reset_email(email)
+        Notification("Reset link sent!", style="success").show()
+
+        # Optional: Hide them again after sending
+        self.reset_email_box.visible = False
+        self.send_reset_btn.visible = False
+        self.reset_email_box.text = ""
+
+      except Exception as e:
+        alert(f"Error: {e}")
+    else:
+      Notification("Please enter an email address.", style="warning").show()
