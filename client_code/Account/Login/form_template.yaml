@@ -78,9 +78,9 @@ components:
   type: TextBox
 - components:
   - data_bindings: []
-    event_bindings: {click: forgot_pass_btn_copy_click}
+    event_bindings: {click: forgot_pass_btn_click}
     layout_properties: {col_xs: 0, row: AZAPIB, width_xs: 3}
-    name: forgot_pass_btn_copy
+    name: forgot_pass_btn
     properties: {align: left, background: '#e0fe9c', bold: true, font: DM Sans, font_size: 10, foreground: '#523d72', icon: 'fa:exclamation-circle', text: forgot password}
     type: Button
   - layout_properties: {col_xs: 0, row: GRTMUL, width_xs: 3}

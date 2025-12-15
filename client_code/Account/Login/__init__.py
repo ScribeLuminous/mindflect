@@ -62,7 +62,3 @@ class Login(LoginTemplate):
         alert(f"Error: {e}")
     else:
       Notification("Please enter an email address.", style="warning").show()
-
-  def forgot_pass_btn_copy_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
