@@ -43,6 +43,63 @@ components:
     text: ''
   type: Label
 - components:
+  - components:
+    - layout_properties: {col_xs: 2, row: YRBXUQ, width_xs: 8}
+      name: label_2
+      properties: {align: center, bold: true, font: Young Serif, font_size: 35, text: your stress level today}
+      type: Label
+    - layout_properties: {col_xs: 1, row: CEPMUY, width_xs: 3}
+      name: stress_level_lbl
+      properties:
+        align: center
+        bold: false
+        font: PT Serif
+        font_size: 40
+        spacing:
+          padding: [10, 0, 0, null]
+        spacing_above: medium
+        spacing_below: none
+        text: ''
+      type: Label
+    - layout_properties: {col_xs: 6, row: CEPMUY, width_xs: 3}
+      name: stress_percent_lbl
+      properties: {align: center, bold: true, font: PT Serif, font_size: 50}
+      type: Label
+    layout_properties: {grid_position: 'DBPFYO,GSYRGF'}
+    name: grid_panel_2
+    properties: {}
+    type: GridPanel
+  - components:
+    - layout_properties: {col_xs: 3, row: YRBXUQ, width_xs: 7}
+      name: label_2_copy
+      properties: {align: center, bold: true, font: Young Serif, font_size: 35, text: your burnout level today}
+      type: Label
+    - layout_properties: {col_xs: 1, row: PDNQEI, width_xs: 3}
+      name: burnout_title_lbl
+      properties:
+        align: center
+        bold: false
+        font: PT Serif
+        font_size: 40
+        spacing:
+          padding: [10, 0, 0, null]
+        spacing_above: medium
+        spacing_below: none
+        text: ''
+      type: Label
+    - layout_properties: {col_xs: 6, row: PDNQEI, width_xs: 3}
+      name: burnout_percent_lbl
+      properties: {align: center, bold: true, font: PT Serif, font_size: 50}
+      type: Label
+    layout_properties: {grid_position: 'DBPFYO,RSCTFQ'}
+    name: grid_panel_2_copy
+    properties: {}
+    type: GridPanel
+  layout_properties: {grid_position: 'OFNQRR,LGPSYL'}
+  name: column_panel_1
+  properties: {}
+  type: ColumnPanel
+- components:
   - layout_properties: {col_xs: 3, row: EMUINT, width_xs: 6}
     name: stress_lbl
     properties: {align: center, bold: true, font: DM Sans, font_size: 18, spacing_below: large, text: WEEKLY STRESS LEVELS}
