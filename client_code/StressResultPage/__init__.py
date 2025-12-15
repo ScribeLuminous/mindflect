@@ -87,35 +87,17 @@ class StressResultPage(StressResultPageTemplate):
     open_form('MainPage')
 
   def save_btn_click(self, **event_args):
-    # FIX: REMOVED 'import anvil.data_management' - THIS WAS THE CAUSE OF THE ERROR
-
-    # 1. Calculate stress result logic
-    try:
-      # Note: assessment_logic.get_result_feedback() returns (result_dict, score)
-      # You are re-calculating here to ensure you have the latest data for saving
-      result_dict, score_val = assessment_logic.get_result_feedback()
-    except Exception as e:
-      Notification("Error calculating results. Please ensure all questions are answered.", style="warning").show()
-      return
-
-      # 2. Check Login
+    # 1. Check Login (Should pass since they came from Account)
     if not anvil.users.get_user():
-      choice = alert(
-        "You need an account to save your stress history.",
-        buttons=[("Login", "login"), ("Sign up", "signup"), ("Cancel", None)],
-        dismissible=True
-      )
-
-      if choice == "login":
-        open_form("Account.Login") # Adjust if your login form name is different
-      elif choice == "signup":
-        open_form("Account.Signup") # Adjust if your signup form name is different
+      alert("Please log in to save your results.")
+      open_form("Account.Login")
       return
 
-      # 3. Save result via Server Call
     try:
-      # We call the server function by string name.
-      # The server module 'data_management' is loaded automatically on the server.
+      # 2. Get the latest calculated results
+      result_dict, score_val = assessment_logic.get_result_feedback()
+
+      # 3. Call the Server to Save (Updates today's entry if exists)
       response = anvil.server.call(
         "save_daily_stress",
         score_val,
@@ -123,12 +105,17 @@ class StressResultPage(StressResultPageTemplate):
         dict(assessment_logic.user_data) 
       )
 
-      if response and response.get("ok") is True:
-        Notification("Stress saved for today 💙").show()
+      if response and response.get("ok"):
+        Notification("Stress result saved! 💙").show()
+
+        open_form('Account') 
+
       else:
-        msg = response.get("msg", "Could not save.") if response else "Unknown error."
-        Notification(f"Save failed: {msg}", style="warning").show()
+        Notification(f"Save failed: {response.get('msg')}", style="warning").show()
 
     except Exception as e:
       print(f"Save error: {e}")
-      Notification("An unexpected error occurred while saving.", style="danger").show()
+      Notification("Error saving result.", style="danger").show()
+
+  def dashboard_btn_click(self, **event_args):
+    open_form('Account')

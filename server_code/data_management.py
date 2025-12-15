@@ -182,40 +182,57 @@ def get_user_history():
 
 @anvil.server.callable
 def get_user_profile_data():
+  """
+  Fetches user's name, latest levels, AND SCRES.
+  """
   user = anvil.users.get_user()
   if not user: 
     return None
 
-  username = user['username']
-  if not username: 
-    username = user['email'].split('@')[0]
+  username = user['username'] or user['email'].split('@')[0]
 
-  # 1. Stress
+  # --- 1. Get Latest Stress ---
   latest_stress = "Unknown"
-  stress_log = app_tables.stress_logs.search(tables.order_by("date", ascending=False), users=user)
+  latest_stress_score = 0  # Default to 0
+
+  stress_log = app_tables.stress_logs.search(
+    tables.order_by("date", ascending=False),
+    users=user
+  )
 
   if len(stress_log) > 0:
+    # Get Score
+    latest_stress_score = stress_log[0]['total_score'] or 0
+
+    # Get Level (or calculate if missing)
     saved_level = stress_log[0]['level']
     if saved_level:
       latest_stress = saved_level
     else:
-      score = stress_log[0]['total_score'] or 0
-      if score < 40: 
+      if latest_stress_score < 40: 
         latest_stress = "Low Stress"
-      elif score < 80: 
+      elif latest_stress_score < 80: 
         latest_stress = "Moderate Stress"
       else: 
         latest_stress = "High Stress"
 
-  # 2. Burnout
+  # --- 2. Get Latest Burnout ---
   latest_burnout = "Unknown"
-  burnout_log = app_tables.burnout_logs.search(tables.order_by("date", ascending=False), users=user)
+  latest_burnout_score = 0 # Default to 0
+
+  burnout_log = app_tables.burnout_logs.search(
+    tables.order_by("date", ascending=False),
+    users=user
+  )
 
   if len(burnout_log) > 0:
-    score = burnout_log[0]['burnout_score'] or 0
-    if score <= 33: 
+    # Get Score
+    latest_burnout_score = burnout_log[0]['burnout_score'] or 0
+
+    # Calculate Level
+    if latest_burnout_score <= 33: 
       latest_burnout = "Low Burnout"
-    elif score <= 66: 
+    elif latest_burnout_score <= 66: 
       latest_burnout = "Moderate Burnout"
     else: 
       latest_burnout = "High Burnout"
@@ -223,5 +240,7 @@ def get_user_profile_data():
   return {
     "username": username,
     "latest_stress_level": latest_stress,
-    "latest_burnout_level": latest_burnout
+    "latest_stress_score": latest_stress_score,   # <--- Sending this now
+    "latest_burnout_level": latest_burnout,
+    "latest_burnout_score": latest_burnout_score  # <--- Sending this now
   }

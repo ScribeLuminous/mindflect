@@ -52,24 +52,37 @@ class Account(AccountTemplate):
     ]
     self.encouragement_lbl.text = f"✨ {random.choice(stress_quotes)}"
 
-    # Stress Recommendations
+    # Retrieve Data
     s_level = data.get('latest_stress_level') 
+    s_score = data.get('latest_stress_score', 0)
+
+    # Update Status Labels
+    self.stress_level_lbl.text = s_level if s_level else "No Data"
+    self.stress_percent_lbl.text = f"{s_score}%" if s_level else "--"
+
+    # Recommendations & Styling
     s_text = ""
+    s_color = "gray"
 
     if s_level and "Low" in s_level:
       s_text = "• Try to read a book\n• Take a short walk\n• Spend time with a pet\n• Listen to calming music"
-      self.stress_recs.foreground = "#4CAF50"
+      s_color = "#4CAF50" # Green
     elif s_level and "Moderate" in s_level:
       s_text = "• Write down your thoughts in a diary\n• Get a change of scenery\n• Take a walk, yoga or dance"
-      self.stress_recs.foreground = "#FF9800"
+      s_color = "#FF9800" # Orange
     elif s_level and "High" in s_level:
       s_text = "• Consider talking with a professional\n• Practice intense physical activity\n• Reach out to a trusted friend"
-      self.stress_recs.foreground = "#F44336"
+      s_color = "#F44336" # Red
     else:
       s_text = "No stress data yet."
-      self.stress_recs.foreground = "gray"
+      s_color = "gray"
 
+    # Apply Text and Colors
     self.stress_recs.text = s_text
+    self.stress_recs.foreground = s_color
+    self.stress_level_lbl.foreground = s_color
+    self.stress_percent_lbl.foreground = s_color
+
 
     # =================================================
     # BURNOUT SECTION
@@ -85,11 +98,18 @@ class Account(AccountTemplate):
     ]
     self.burn_encouragement_lbl.text = f"🌿 {random.choice(burnout_quotes)}"
 
-    # Burnout Recommendations
+    # Retrieve Data
     b_level = data.get('latest_burnout_level')
-    b_text = ""
+    b_score = data.get('latest_burnout_score', 0)
 
-    # FIX: Check "if b_level" first
+    # Update Status Labels
+    self.burnout_title_lbl.text = b_level if b_level else "No Data"
+    self.burnout_percent_lbl.text = f"{b_score}%" if b_level else "--"
+
+    # Recommendations & Styling
+    b_text = ""
+    b_color = "gray"
+
     if b_level and "Low" in b_level:
       b_text = (
         "• Prioritize your self-care.\n"
@@ -97,7 +117,7 @@ class Account(AccountTemplate):
         "• Take short breaks.\n"
         "• Learn to say 'no' to non-essential tasks."
       )
-      self.burnout_recs.foreground = "#4CAF50" # Green
+      b_color = "#4CAF50" # Green
 
     elif b_level and "Moderate" in b_level:
       b_text = (
@@ -106,7 +126,7 @@ class Account(AccountTemplate):
         "• Do meditation.\n"
         "• Limit social media use."
       )
-      self.burnout_recs.foreground = "#FF9800" # Orange
+      b_color = "#FF9800" # Orange
 
     elif b_level and "High" in b_level:
       b_text = (
@@ -114,27 +134,35 @@ class Account(AccountTemplate):
         "• Focus on rest and recovery.\n"
         "• Take a break from work or responsibilities."
       )
-      self.burnout_recs.foreground = "#F44336" # Red
+      b_color = "#F44336" # Red
 
     else:
       b_text = "No burnout data yet."
-      self.burnout_recs.foreground = "gray"
+      b_color = "gray"
 
+    # Apply Text and Colors
     self.burnout_recs.text = b_text
+    self.burnout_recs.foreground = b_color
+    self.burnout_title_lbl.foreground = b_color
+    self.burnout_percent_lbl.foreground = b_color
 
 
   # --- GRAPH LOGIC ---
   def load_history_graphs(self):
     try:
-      stress_data, burnout_data = anvil.server.call('get_user_history')
+        stress_data, burnout_data = anvil.server.call('get_user_history')
     except Exception:
-      return 
+        return 
 
     # Stress Plot
     if stress_data:
       dates = [x['date'] for x in stress_data]
       scores = [x['score'] for x in stress_data]
-      self.stress_plot.data = [go.Scatter(x=dates, y=scores, mode='lines+markers', name='Stress', line=dict(color='#4CAF50', width=3))]
+      
+      # Handle single data point
+      mode = 'lines+markers' if len(dates) > 1 else 'markers'
+      
+      self.stress_plot.data = [go.Scatter(x=dates, y=scores, mode=mode, name='Stress', line=dict(color='#4CAF50', width=3))]
       self.stress_plot.layout = go.Layout(title="Weekly Stress Tracker", yaxis=dict(range=[0, 100]), margin=dict(t=40, b=40, l=40, r=40))
     else:
       self.stress_plot.layout = go.Layout(title="No Stress Data Yet")
@@ -143,7 +171,11 @@ class Account(AccountTemplate):
     if burnout_data:
       dates = [x['date'] for x in burnout_data]
       scores = [x['score'] for x in burnout_data]
-      self.burnout_plot.data = [go.Scatter(x=dates, y=scores, mode='lines+markers', name='Burnout', line=dict(color='#FF5722', width=3))]
+      
+      # Handle single data point
+      mode = 'lines+markers' if len(dates) > 1 else 'markers'
+
+      self.burnout_plot.data = [go.Scatter(x=dates, y=scores, mode=mode, name='Burnout', line=dict(color='#FF5722', width=3))]
       self.burnout_plot.layout = go.Layout(title="Burnout Risk Over Time", yaxis=dict(range=[0, 100]), margin=dict(t=40, b=40, l=40, r=40))
     else:
       self.burnout_plot.layout = go.Layout(title="No Burnout Data Yet")

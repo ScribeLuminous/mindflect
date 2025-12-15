@@ -54,7 +54,7 @@ components:
         align: center
         bold: false
         font: PT Serif
-        font_size: 40
+        font_size: 35
         spacing:
           padding: [10, 0, 0, null]
         spacing_above: medium
@@ -80,7 +80,7 @@ components:
         align: center
         bold: false
         font: PT Serif
-        font_size: 40
+        font_size: 35
         spacing:
           padding: [10, 0, 0, null]
         spacing_above: medium
@@ -99,6 +99,10 @@ components:
   name: column_panel_1
   properties: {}
   type: ColumnPanel
+- layout_properties: {grid_position: 'YBFGHQ,XLCZYP'}
+  name: spacer_2
+  properties: {height: 32}
+  type: Spacer
 - components:
   - layout_properties: {col_xs: 3, row: EMUINT, width_xs: 6}
     name: stress_lbl

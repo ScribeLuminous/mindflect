@@ -38,3 +38,7 @@ class Login(LoginTemplate):
   def account_btn_click(self, **event_args):
     open_form('Account.Signup')
     pass
+
+  def forgot_pass_btn_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
