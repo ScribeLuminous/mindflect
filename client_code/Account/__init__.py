@@ -53,11 +53,9 @@ class Account(AccountTemplate):
     self.encouragement_lbl.text = f"✨ {random.choice(stress_quotes)}"
 
     # Stress Recommendations
-    # FIX: Use .get() to avoid crashing if key is missing
     s_level = data.get('latest_stress_level') 
     s_text = ""
 
-    # FIX: Check "if s_level" first to ensure it is not None
     if s_level and "Low" in s_level:
       s_text = "• Try to read a book\n• Take a short walk\n• Spend time with a pet\n• Listen to calming music"
       self.stress_recs.foreground = "#4CAF50"
