@@ -1,4 +1,5 @@
-# -- BurnoutResultPage.py (FINAL COMPLETE CODE) --
+
+# -- BurnoutResultPage.py --
 
 from ._anvil_designer import BurnoutResultPageTemplate
 from anvil import *
@@ -17,8 +18,8 @@ class BurnoutResultPage(BurnoutResultPageTemplate):
   def __init__(self, result, score, **properties):
     self.init_components(**properties)
 
-    # Ensure score is 1-100
-    score_int = round(max(1, min(100, score)))
+    # 1. FIXED: Ensure score is strictly an Integer (no decimals)
+    score_int = int(round(max(1, min(100, score))))
 
     # Update UI Labels
     self.percent_lbl.text = f"{score_int}%"
@@ -28,7 +29,7 @@ class BurnoutResultPage(BurnoutResultPageTemplate):
     if "color" in result:
       self.percent_lbl.foreground = result["color"]
 
-      # Draw Gauge
+    # Draw Gauge with the integer score
     self.draw_gauge(score_int)
 
     # Set Text Content
@@ -96,19 +97,25 @@ class BurnoutResultPage(BurnoutResultPageTemplate):
         open_form("Account.Signup")
       return
 
-      # 2. Save via Server
     try:
-      score = int(self.percent_lbl.text.strip('%'))
-      guidance = self.recs_lbl.text
+      # 2. FIXED: Grab the score as an integer
+      # We strip the '%' and convert to int to be safe
+      score_str = self.percent_lbl.text.replace('%', '')
+      score_val = int(score_str)
 
-      # Using the 'log_burnout_assessment' function we added to data_management.py
+      level_val = self.title_lbl.text
+
+      # 3. Call Server to Save
+      # We send the specific burnout data
       anvil.server.call(
         "log_burnout_assessment",
-        burnout_score=score,
-        guidance=guidance,
+        burnout_score=score_val,
+        burnout_level=level_val,
         user_inputs=dict(assessment_logic.burnout_data)
       )
-      Notification("Burnout result saved.").show()
+
+      Notification("Burnout result saved!").show()
+      open_form('Account') # Redirect to Account to see the result
 
     except Exception as e:
       print(f"Save error: {e}")

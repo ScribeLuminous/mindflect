@@ -39,12 +39,7 @@ class Login(LoginTemplate):
     open_form('Account.Signup')
     pass
 
-  def send_reset_btn_click(self, **event_args):
-    """This method is called when the button is clicked"""
-    pass
-
   def forgot_pass_btn_click(self, **event_args):
-    """Unhides the reset email box and button."""
     self.reset_email_box.visible = True
     self.send_reset_btn.visible = True
     self.reset_email_box.focus() 
@@ -67,3 +62,7 @@ class Login(LoginTemplate):
         alert(f"Error: {e}")
     else:
       Notification("Please enter an email address.", style="warning").show()
+
+  def forgot_pass_btn_copy_click(self, **event_args):
+    """This method is called when the button is clicked"""
+    pass
